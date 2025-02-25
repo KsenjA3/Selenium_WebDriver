@@ -1,4 +1,4 @@
-package innowise.aqa;
+package tests.aqa;
 
 import java.io.FileInputStream;
 import java.io.IOException;
