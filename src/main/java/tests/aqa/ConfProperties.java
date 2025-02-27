@@ -10,7 +10,7 @@ public class ConfProperties {
     static {
         try {
             //указание пути до файла с настройками
-            fileInputStream = new FileInputStream("src/test/resources/conf.yaml");
+            fileInputStream = new FileInputStream("src/main/resources/conf.yaml");
             PROPERTIES = new Properties();
             PROPERTIES.load(fileInputStream);
         } catch (IOException e) {

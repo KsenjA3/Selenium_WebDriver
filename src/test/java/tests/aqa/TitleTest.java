@@ -8,14 +8,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class WebSiteTests {
+
+public class TitleTest {
     WebDriver driver;
 
 
     @BeforeEach
     void setUp() {
         driver = new ChromeDriver();
-        driver.get(ConfProperties.getProperty("testingpage"));
+        driver.get(ConfProperties.getProperty("shop_page"));
     }
 
     @AfterEach
