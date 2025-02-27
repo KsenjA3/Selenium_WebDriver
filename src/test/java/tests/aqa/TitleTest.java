@@ -9,7 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class TitleTest {
+public class TitleTest{
     WebDriver driver;
 
 
@@ -26,6 +26,8 @@ public class TitleTest {
 
     @Test
     void title() {
+
+
         assertEquals("Demo Web Shop",driver.getTitle());
     }
 }

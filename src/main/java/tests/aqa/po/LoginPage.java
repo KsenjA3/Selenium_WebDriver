@@ -12,7 +12,7 @@ import java.time.Duration;
 
 @Log4j2
 public class LoginPage {
-    WebDriver driver;
+    private WebDriver driver;
 
     public LoginPage(WebDriver driver){
         this.driver = driver;
@@ -52,10 +52,9 @@ public class LoginPage {
         this.clickLogin();
     }
 
-    public String getLabelSite() {
-        log.info("Text on the Login Site page");
+    public String getNameLabelCompany() {
         return new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.LABEL_SITE_LOCATOR.get())))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.NAME_COMPANY_LABEL_SITE_LOCATOR.get())))
                 .getText();
     }
 
