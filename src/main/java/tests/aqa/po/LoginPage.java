@@ -43,31 +43,28 @@ public class LoginPage {
      * @param strPasword
      * @return
      */
-    public String loginPage(String strUserName,String strPasword){
+    public void loginPage(String strUserName,String strPasword){
         //Fill user name
         this.setUserName(strUserName);
         //Fill password
         this.setPassword(strPasword);
         //Click Login button
         this.clickLogin();
-        String currentUrl = driver.getCurrentUrl();
+    }
 
+    // Return to login page from home page, it was successful registration
+    public String loginPage_and_saveURLdriver(String strUserName,String strPasword){
+        loginPage(strUserName, strPasword);
+
+        String currentUrl = driver.getCurrentUrl();
         if (currentUrl.equals("https://aspect.t8s.ru/")){
             return new WebDriverWait(driver, Duration.ofSeconds(10))
                     .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.ERROR_REPORT_IDENTIFICATION_LOCATOR.get())))
                     .getText();
-        }else if (currentUrl.equals("https://aspect.t8s.ru/Student")) {
-            log.info("try to back from current page "+driver.getCurrentUrl()+ " to Login Page");
-            new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.EXIT_MENU_ACCOUNT_LOCATOR.get())))
-                    .click();
-            new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.EXIT_ACCOUNT_LOCATOR.get())))
-                    .click();
-            log.info("after attempt to back for Login Page, current page is "+driver.getCurrentUrl());
         }
         return currentUrl;
     }
+
 
     public String getNameLabelCompany() {
         return   new WebDriverWait(driver, Duration.ofSeconds(10))

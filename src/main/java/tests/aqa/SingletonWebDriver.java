@@ -15,8 +15,7 @@ public class SingletonWebDriver {
     public static WebDriver getDriver(String browser) {
         log.info("Perform driver " + browser);
         WebDriver driver=chooseDriver(browser);
-
-        if (driver == null) {
+        if (driver==null) {
             synchronized (WebDriver.class) {
                 if (driver == null) {
                     switch (browser) {
@@ -35,6 +34,11 @@ public class SingletonWebDriver {
         WebDriver driver=chooseDriver(browser);
         if (driver != null) {
             driver.quit();
+            switch (browser) {
+                case "chrome"-> driverChrome=null;
+                case "edge"-> driverEdge=null;
+                case "mozilla"-> driverMozilla=null;
+            }
         }
         log.info("Driver is closed");
     }
