@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 @Log4j2
 public class SingletonWebDriver {
@@ -21,7 +22,7 @@ public class SingletonWebDriver {
                     switch (browser) {
                         case "chrome"-> driver =driverChrome = new ChromeDriver();
                         case "edge"-> driver =driverEdge = new EdgeDriver();
-                        case "mozilla"-> driver =driverMozilla = new ChromeDriver();
+                        case "mozilla"-> driver =driverMozilla = new FirefoxDriver();
                     }
                     driver.manage().window().maximize();
                 }

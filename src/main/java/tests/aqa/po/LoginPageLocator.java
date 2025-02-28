@@ -6,6 +6,11 @@ public enum LoginPageLocator {
     PASSWORD_INPUT_LOCATOR ("//*[@id='LogPassword']"),
     LOGIN_BUTTON_LOCATOR ("//button[@type='submit']"),
     NAME_COMPANY_LABEL_SITE_LOCATOR ("//*[@class='card-body']//h5"),
+    COMPANY_LABEL_SITE_LOCATOR ("//*[@alt='Аспект']"),
+    HREF_FORGOT_PASSWORD_SITE_LOCATOR ("//a[contains(text(),'Забыли пароль?')]"),
+    ERROR_REPORT_IDENTIFICATION_LOCATOR ("//*[contains(text(),'Неудачная попытка входа.')]"),
+    EXIT_MENU_ACCOUNT_LOCATOR ("//a[@class='dropdown-toggle']"),
+    EXIT_ACCOUNT_LOCATOR ("//a[@href='/Account/LogOff']"),
     ;
 
     private String str;

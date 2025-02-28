@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.aqa.ConfProperties;
@@ -16,7 +17,6 @@ public class LoginPage {
 
     public LoginPage(WebDriver driver){
         this.driver = driver;
-        driver.get(ConfProperties.getProperty("log_page"));
     }
 
     //Set user name in textbox
@@ -43,22 +43,60 @@ public class LoginPage {
      * @param strPasword
      * @return
      */
-    public void loginPage(String strUserName,String strPasword){
+    public String loginPage(String strUserName,String strPasword){
         //Fill user name
         this.setUserName(strUserName);
         //Fill password
         this.setPassword(strPasword);
         //Click Login button
         this.clickLogin();
+        String currentUrl = driver.getCurrentUrl();
+
+        if (currentUrl.equals("https://aspect.t8s.ru/")){
+            return new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.ERROR_REPORT_IDENTIFICATION_LOCATOR.get())))
+                    .getText();
+        }else if (currentUrl.equals("https://aspect.t8s.ru/Student")) {
+            log.info("try to back from current page "+driver.getCurrentUrl()+ " to Login Page");
+            new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.EXIT_MENU_ACCOUNT_LOCATOR.get())))
+                    .click();
+            new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.EXIT_ACCOUNT_LOCATOR.get())))
+                    .click();
+            log.info("after attempt to back for Login Page, current page is "+driver.getCurrentUrl());
+        }
+        return currentUrl;
     }
 
     public String getNameLabelCompany() {
-        return new WebDriverWait(driver, Duration.ofSeconds(10))
+        return   new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.NAME_COMPANY_LABEL_SITE_LOCATOR.get())))
                 .getText();
     }
 
+    public String getAttribute_FieldLogin_data_val_required() {
+        return   new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.USERNAME_INPUT_LOCATOR.get())))
+                .getDomAttribute("data-val-required");
+    }
 
+
+    public boolean isDisplayed_LabelCompany() {
+        return   new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.COMPANY_LABEL_SITE_LOCATOR.get())))
+                .isDisplayed();
+    }
+
+    public String getColor_LoginButton() {
+        return   new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.LOGIN_BUTTON_LOCATOR.get())))
+                .getCssValue("color");
+    }
+
+    public void click_forgotPassword() {
+         driver.findElement(By.xpath(LoginPageLocator.HREF_FORGOT_PASSWORD_SITE_LOCATOR.get())).click();
+    }
 
 
 }

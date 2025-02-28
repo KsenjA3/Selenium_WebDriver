@@ -1,14 +1,11 @@
-package tests.aqa.loginPage;
+package tests.aqa;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
-import tests.aqa.ConfProperties;
-import tests.aqa.SingletonWebDriver;
 
 
-
-class BaseTest {
+public class BaseTest {
 
     protected static WebDriver driver;
 
