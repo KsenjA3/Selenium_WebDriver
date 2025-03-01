@@ -3,8 +3,11 @@ package tests.aqa;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 @Log4j2
 public class SingletonWebDriver {
@@ -18,10 +21,23 @@ public class SingletonWebDriver {
         if (driver==null) {
             synchronized (WebDriver.class) {
                 if (driver == null) {
+
                     switch (browser) {
-                        case "chrome"-> driver =driverChrome = new ChromeDriver();
-                        case "edge"-> driver =driverEdge = new EdgeDriver();
-                        case "mozilla"-> driver =driverMozilla = new FirefoxDriver();
+                        case "chrome"-> {
+                            ChromeOptions options = new ChromeOptions();
+                            options.addArguments("headless");
+                            driver =driverChrome = new ChromeDriver(options);
+                        }
+                        case "edge"-> {
+                            EdgeOptions options = new EdgeOptions();
+                            options.addArguments("headless");
+                            driver =driverEdge = new EdgeDriver(options);
+                        }
+                        case "mozilla"-> {
+                            FirefoxOptions options = new FirefoxOptions();
+                            options.addArguments("headless");
+                            driver =driverMozilla = new FirefoxDriver(options);
+                        }
                     }
                     driver.manage().window().maximize();
                 }
