@@ -1,4 +1,4 @@
-package tests.aqa.po;
+package tests.aqa.ui.po;
 
 public enum HomePageLocator {
     EXIT_MENU_ACCOUNT_LOCATOR ("//a[@class='dropdown-toggle']"),
