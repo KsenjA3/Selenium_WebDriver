@@ -7,8 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.aqa.BaseTest;
 import tests.aqa.ConfProperties;
-import tests.aqa.po.HomePageLocator;
-import tests.aqa.po.LoginPage;
+import tests.aqa.ui.po.HomePageLocator;
+import tests.aqa.ui.po.LoginPage;
 
 import java.time.Duration;
 

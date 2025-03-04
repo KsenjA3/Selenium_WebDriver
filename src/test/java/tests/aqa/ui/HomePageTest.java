@@ -4,16 +4,12 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
 import tests.aqa.BaseTest;
 import tests.aqa.ConfProperties;
-import tests.aqa.po.HomePage;
-import tests.aqa.po.LoginPage;
+import tests.aqa.ui.po.HomePage;
+import tests.aqa.ui.po.LoginPage;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
