@@ -1,4 +1,4 @@
-package tests.aqa.singleton;
+package tests.aqa.ui.drivers.singleton;
 
 public enum Browser {
     FIREFOX,

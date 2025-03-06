@@ -1,4 +1,4 @@
-package tests.aqa.factoryDriver;
+package tests.aqa.ui.drivers.factoryDriver;
 
 import org.openqa.selenium.WebDriver;
 

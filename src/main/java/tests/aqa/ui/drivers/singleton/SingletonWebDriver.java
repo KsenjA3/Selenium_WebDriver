@@ -1,4 +1,4 @@
-package tests.aqa.singleton;
+package tests.aqa.ui.drivers.singleton;
 
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;

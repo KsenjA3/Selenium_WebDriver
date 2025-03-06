@@ -5,14 +5,10 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import org.openqa.selenium.WebDriver;
-import tests.aqa.chainOfResponsibility.DriverChromeHandler;
-import tests.aqa.chainOfResponsibility.DriverEdgeHandler;
-import tests.aqa.chainOfResponsibility.DriverFirefoxHandler;
-import tests.aqa.chainOfResponsibility.DriverHandler;
-import tests.aqa.factoryDriver.DriverFactory;
-import tests.aqa.factoryDriver.DriverManager;
-import tests.aqa.singleton.Browser;
-import tests.aqa.singleton.SingletonWebDriver;
+import tests.aqa.ui.drivers.chainOfResponsibility.DriverChromeHandler;
+import tests.aqa.ui.drivers.chainOfResponsibility.DriverEdgeHandler;
+import tests.aqa.ui.drivers.chainOfResponsibility.DriverFirefoxHandler;
+import tests.aqa.ui.drivers.chainOfResponsibility.DriverHandler;
 
 import java.util.HashSet;
 import java.util.Set;

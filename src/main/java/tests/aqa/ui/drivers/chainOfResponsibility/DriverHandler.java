@@ -1,4 +1,4 @@
-package tests.aqa.chainOfResponsibility;
+package tests.aqa.ui.drivers.chainOfResponsibility;
 
 import org.openqa.selenium.WebDriver;
 

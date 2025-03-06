@@ -1,13 +1,13 @@
-package tests.aqa.chainOfResponsibility;
+package tests.aqa.ui.drivers.chainOfResponsibility;
 
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 
 @Log4j2
-public class DriverFirefoxHandler implements DriverHandler{
+public class DriverEdgeHandler implements DriverHandler{
     private DriverHandler nextHandler;
 
     @Override
@@ -19,11 +19,11 @@ public class DriverFirefoxHandler implements DriverHandler{
     public WebDriver getDriver(String browser) {
         WebDriver driver=null;
 
-        if (browser.equalsIgnoreCase("Firefox")) {
-            FirefoxOptions options = new FirefoxOptions();
-            options.addArguments("-headless");
-            driver = new FirefoxDriver(options);
-            driver.manage().window().setPosition(new Point(200,200));
+        if (browser.equalsIgnoreCase("Edge")) {
+            EdgeOptions options = new EdgeOptions();
+            options.addArguments("headless");
+            driver = new EdgeDriver(options);
+            driver.manage().window().setPosition(new Point(400,400));
             log.info("Perform driver from Chain of Responsibility" + browser);
 
         } else if (nextHandler != null) {

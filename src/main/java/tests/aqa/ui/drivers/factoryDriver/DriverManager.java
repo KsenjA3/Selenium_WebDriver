@@ -1,4 +1,4 @@
-package tests.aqa.factoryDriver;
+package tests.aqa.ui.drivers.factoryDriver;
 
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
