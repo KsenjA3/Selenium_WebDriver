@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import tests.aqa.BaseTest;
 import tests.aqa.ConfProperties;
 import tests.aqa.ui.po.HomePage;
 import tests.aqa.ui.po.LoginPage;

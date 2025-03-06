@@ -11,10 +11,11 @@ public class PostRequest {
             String endpoint, Map<String, Object> header, Object body) {
 
 
-        return given().log()
+        return given()
+                .log()
                 .all(true)
                 .headers(MapUtils.emptyIfNull(header))
-                //                .params(MapUtils.emptyIfNull(params))
+//                .params(MapUtils.emptyIfNull(params))
                 .body(body != null ? body : "{}")
                 .when()
                 .post(endpoint)

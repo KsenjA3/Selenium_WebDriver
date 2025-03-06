@@ -1,10 +1,11 @@
-package tests.aqa;
+package tests.aqa.ui;
 
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import org.openqa.selenium.WebDriver;
+import tests.aqa.ConfProperties;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverChromeHandler;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverEdgeHandler;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverFirefoxHandler;
