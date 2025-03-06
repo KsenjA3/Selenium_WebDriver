@@ -1,4 +1,3 @@
 shop_page : https://demowebshop.tricentis.com
 log_page : https://aspect.t8s.ru
-driver : chrome
-                # OR:  edge , mozilla
+drivers : Chrome,Firefox,NotExist,Edge

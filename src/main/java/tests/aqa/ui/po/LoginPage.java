@@ -1,12 +1,11 @@
 package tests.aqa.ui.po;
 
 import lombok.extern.log4j.Log4j2;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 @Log4j2
@@ -32,7 +31,10 @@ public class LoginPage {
     //Click on login button
     public void clickLogin(){
         log.info("click login");
-        driver.findElement(By.xpath(LoginPageLocator.LOGIN_BUTTON_LOCATOR.get())).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable
+                (By.xpath(LoginPageLocator.LOGIN_BUTTON_LOCATOR.get())));
+        element.click();
     }
 
     /**
@@ -50,10 +52,13 @@ public class LoginPage {
         this.clickLogin();
     }
 
-    // Return to login page from home page, it was successful registration
-    public String loginPage_and_saveURLdriver(String strUserName,String strPasword){
+    public String tryLoginPage(String strUserName,String strPasword){
         loginPage(strUserName, strPasword);
+        return driver.getCurrentUrl();
+    }
 
+    public String tryLoginPage_returnInfoMessageOfResult(String strUserName,String strPasword){
+        loginPage(strUserName, strPasword);
         String currentUrl = driver.getCurrentUrl();
         if (currentUrl.equals("https://aspect.t8s.ru/")){
             return new WebDriverWait(driver, Duration.ofSeconds(10))
@@ -62,7 +67,6 @@ public class LoginPage {
         }
         return currentUrl;
     }
-
 
     public String getNameLabelCompany() {
         return   new WebDriverWait(driver, Duration.ofSeconds(10))
@@ -89,9 +93,15 @@ public class LoginPage {
                 .getCssValue("color");
     }
 
-    public void click_forgotPassword() {
-         driver.findElement(By.xpath(LoginPageLocator.HREF_FORGOT_PASSWORD_SITE_LOCATOR.get())).click();
+    public String click_forgotPassword() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable
+                (By.xpath(LoginPageLocator.HREF_FORGOT_PASSWORD_SITE_LOCATOR.get())));
+        element.click();
+       return driver.getCurrentUrl();
     }
 
-
+    public String get_title() {
+        return driver.getTitle();
+    }
 }

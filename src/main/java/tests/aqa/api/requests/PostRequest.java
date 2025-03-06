@@ -1,5 +1,9 @@
 package tests.aqa.api.requests;
 
+import io.restassured.response.Response;
+import org.apache.commons.collections4.MapUtils;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class PostRequest {

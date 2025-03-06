@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import tests.aqa.BaseTest;
 import tests.aqa.ConfProperties;
 import tests.aqa.ui.po.HomePage;
@@ -16,22 +17,26 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Log4j2
 public class HomePageTest extends BaseTest {
     HomePage homePage;
 
     @BeforeAll
-    static void loginToHomePage()  {
-        driver.get(ConfProperties.getProperty("log_page"));
-        new LoginPage(driver).loginPage("xlyna@yandex.ru", "FVqHMbtBfnQk");
+    void loginToHomePage()  {
+        driverSet.forEach(driver -> {
+            driver.get(ConfProperties.getProperty("log_page"));
+            new LoginPage(driver).loginPage("xlyna@yandex.ru", "FVqHMbtBfnQk");
+        });
     }
 
     @BeforeEach
     void openPage()  {
-        driver.get(ConfProperties.getProperty("log_page"));
-        homePage=new HomePage(driver);
-        log.info("The site home page " + driver.getCurrentUrl()+ " is opened");
+        driverSet.forEach(driver -> {
+            driver.get(ConfProperties.getProperty("log_page"));
+            homePage=new HomePage(driver);
+            log.info("The site home page " + driver.getCurrentUrl()+ " is opened");
+        });
     }
 
 

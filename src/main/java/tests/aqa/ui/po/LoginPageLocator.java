@@ -1,6 +1,5 @@
 package tests.aqa.ui.po;
 
-
 public enum LoginPageLocator {
     USERNAME_INPUT_LOCATOR ("//*[@id='LogLogin']"),
     PASSWORD_INPUT_LOCATOR ("//*[@id='LogPassword']"),
@@ -9,13 +8,12 @@ public enum LoginPageLocator {
     COMPANY_LABEL_SITE_LOCATOR ("//*[@alt='Аспект']"),
     HREF_FORGOT_PASSWORD_SITE_LOCATOR ("//a[contains(text(),'Забыли пароль?')]"),
     ERROR_REPORT_IDENTIFICATION_LOCATOR ("//*[contains(text(),'Неудачная попытка входа.')]"),
-
     ;
 
     private String str;
 
     LoginPageLocator (String str){
-        this.str= str;
+        this.str = str;
     }
 
     public String get (){

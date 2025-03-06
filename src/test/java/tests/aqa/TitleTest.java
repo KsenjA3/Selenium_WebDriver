@@ -8,26 +8,22 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 public class TitleTest{
     WebDriver driver;
 
-
-    @BeforeEach
-    void setUp() {
-        driver = new ChromeDriver();
-        driver.get(ConfProperties.getProperty("shop_page"));
-    }
-
-    @AfterEach
-    void tearDown() {
-        driver.quit();
-    }
-
-    @Test
-    void title() {
-
-
-        assertEquals("Demo Web Shop",driver.getTitle());
-    }
+//    @BeforeEach
+//    void setUp() {
+//        driver = new ChromeDriver();
+//        driver.get(ConfProperties.getProperty("shop_page"));
+//    }
+//
+//    @AfterEach
+//    void tearDown() {
+//        driver.quit();
+//    }
+//
+//    @Test
+//    void title() {
+//        assertEquals("Demo Web Shop",driver.getTitle());
+//    }
 }

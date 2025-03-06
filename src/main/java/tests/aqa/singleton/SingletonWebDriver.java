@@ -1,4 +1,4 @@
-package tests.aqa;
+package tests.aqa.singleton;
 
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
@@ -11,32 +11,29 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 @Log4j2
 public class SingletonWebDriver {
-    private static volatile WebDriver driverChrome;
-    private static volatile WebDriver driverEdge;
-    private static volatile WebDriver driverMozilla;
+    private static volatile WebDriver driver;
 
-    public static WebDriver getDriver(String browser) {
+    public static WebDriver getDriver(Browser browser) {
         log.info("Perform driver " + browser);
-        WebDriver driver=chooseDriver(browser);
         if (driver==null) {
             synchronized (WebDriver.class) {
                 if (driver == null) {
 
                     switch (browser) {
-                        case "chrome"-> {
+                        case CHROME-> {
                             ChromeOptions options = new ChromeOptions();
                             options.addArguments("headless");
-                            driver =driverChrome = new ChromeDriver(options);
+                            driver =  new ChromeDriver(options);
                         }
-                        case "edge"-> {
+                        case EDGE-> {
                             EdgeOptions options = new EdgeOptions();
                             options.addArguments("headless");
-                            driver =driverEdge = new EdgeDriver(options);
+                            driver = new EdgeDriver(options);
                         }
-                        case "mozilla"-> {
+                        case FIREFOX-> {
                             FirefoxOptions options = new FirefoxOptions();
                             options.addArguments("headless");
-                            driver =driverMozilla = new FirefoxDriver(options);
+                            driver = new FirefoxDriver(options);
                         }
                     }
                     driver.manage().window().maximize();
@@ -46,28 +43,11 @@ public class SingletonWebDriver {
         return driver;
     }
 
-    public static void quitDriver(String browser) {
-        WebDriver driver=chooseDriver(browser);
+    public static void quitDriver(Browser browser) {
         if (driver != null) {
             driver.quit();
-            switch (browser) {
-                case "chrome"-> driverChrome=null;
-                case "edge"-> driverEdge=null;
-                case "mozilla"-> driverMozilla=null;
-            }
+            driver = null;
         }
         log.info("Driver is closed");
     }
-
-    private static WebDriver chooseDriver(String browser) {
-        WebDriver driver;
-        switch (browser) {
-            case "chrome"-> driver = driverChrome;
-            case "edge"-> driver =driverEdge;
-            case "mozilla"-> driver =driverMozilla;
-            default -> driver = null;
-        }
-        return driver;
-    }
-
 }

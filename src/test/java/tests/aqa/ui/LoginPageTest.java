@@ -9,9 +9,7 @@ import tests.aqa.BaseTest;
 import tests.aqa.ConfProperties;
 import tests.aqa.ui.po.HomePageLocator;
 import tests.aqa.ui.po.LoginPage;
-
 import java.time.Duration;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,22 +20,24 @@ public class LoginPageTest extends BaseTest {
 
     @BeforeEach
     void openPage()  {
-        driver.get(ConfProperties.getProperty("log_page"));
-        if (driver.getCurrentUrl().equals("https://aspect.t8s.ru/Student")) {
-            new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath(HomePageLocator.EXIT_MENU_ACCOUNT_LOCATOR.get())))
-                    .click();
-            new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath(HomePageLocator.EXIT_ACCOUNT_LOCATOR.get())))
-                    .click();
-        }
-        loginPage=new LoginPage(driver);
-        log.info("The site login page " + driver.getCurrentUrl()+ " is opened");
+        driverSet.forEach(driver -> {
+            driver.get(ConfProperties.getProperty("log_page"));
+            if (driver.getCurrentUrl().equals("https://aspect.t8s.ru/Student")) {
+                new WebDriverWait(driver, Duration.ofSeconds(10))
+                        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(HomePageLocator.EXIT_MENU_ACCOUNT_LOCATOR.get())))
+                        .click();
+                new WebDriverWait(driver, Duration.ofSeconds(10))
+                        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(HomePageLocator.EXIT_ACCOUNT_LOCATOR.get())))
+                        .click();
+            }
+            loginPage=new LoginPage(driver);
+            log.info("The site login page " + driver.getCurrentUrl()+ " is opened");
+        });
     }
 
     @Test
     void testLoginPageTitle() {
-        assertEquals("Вход на сайт",driver.getTitle());
+        assertEquals("Вход на сайт",loginPage.get_title());
     }
 
     @Test
@@ -61,29 +61,24 @@ public class LoginPageTest extends BaseTest {
     }
 
     @Test
-    void testLoginPage_clickHref_ForgotPassword() {
-        loginPage.click_forgotPassword();
-        assertEquals("https://aspect.t8s.ru/Account/ResetPassword",driver.getCurrentUrl());
+    void testLoginPage_clickHref_ForgotPassword() throws InterruptedException {
+        assertEquals("https://aspect.t8s.ru/Account/ResetPassword",  loginPage.click_forgotPassword());
     }
 
     @Test
     void testLoginPage_entry_withCorrectIdentity() {
-        assertEquals("https://aspect.t8s.ru/Student",loginPage.loginPage_and_saveURLdriver("xlyna@yandex.ru", "FVqHMbtBfnQk"));
-
+        assertEquals("https://aspect.t8s.ru/Student",loginPage.tryLoginPage("xlyna@yandex.ru", "FVqHMbtBfnQk"));
     }
 
     @Test
     void testLoginPage_entry_withIncorrectIdentity() {
-        loginPage.loginPage_and_saveURLdriver("12345@yandex.ru", "123456789");
-        assertEquals("https://aspect.t8s.ru/",driver.getCurrentUrl());
+        assertEquals("https://aspect.t8s.ru/", loginPage.tryLoginPage("12345@yandex.ru", "123456789"));
     }
 
-
-@Test
+    @Test
     void testLoginPage_entry_withIncorrectIdentity_ReportError() {
-
         assertEquals("Неудачная попытка входа. Пожалуйста, попробуйте ещё раз.",
-                loginPage.loginPage_and_saveURLdriver("12345@yandex.ru", "123456789"));
+                loginPage.tryLoginPage_returnInfoMessageOfResult("12345@yandex.ru", "123456789"));
     }
 
 }
