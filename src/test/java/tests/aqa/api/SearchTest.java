@@ -48,12 +48,14 @@ public class SearchTest {
             headers.put("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36");
         Map<String, Object> params= new HashMap<>();
             params.put("q", "дом");
-        Response response = GetRequest.makeGetRequestAndGetResponse(BARACHOLKA_FIND_DOM_URL, headers, null);
+        Response response = GetRequest.makeGetRequestAndGetResponse(BARACHOLKA_FIND_DOM_URL, headers, params);
         String body = response.getBody().asString();
 
+        System.out.println(body);
+
         assertEquals(200, response.getStatusCode());
-        assertTrue(body.contains("Поиск на Барахолке"));
-        assertTrue(body.contains("дом"));
+        assertTrue(body.contains("<h1 class=\"m-title-i \">Поиск на Барахолке</h1>"));
+        assertTrue(body.contains("<input type=\"text\" class=\"i-p\" autocomplete=\"off\" placeholder=\"Поиск в разделе\" name=\"q\" value=\"дом\">"));
     }
 
 }
