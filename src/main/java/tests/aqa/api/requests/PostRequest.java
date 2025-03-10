@@ -12,16 +12,16 @@ public class PostRequest {
 
 
         return given()
-                .log()
-                .all(true)
+//                .log()
+//                .all(true)
                 .headers(MapUtils.emptyIfNull(header))
 //                .params(MapUtils.emptyIfNull(params))
                 .body(body != null ? body : "{}")
                 .when()
                 .post(endpoint)
                 .then()
-                .log()
-                .all(true)
+//                .log()
+//                .all(true)
                 .extract()
                 .response();
     }

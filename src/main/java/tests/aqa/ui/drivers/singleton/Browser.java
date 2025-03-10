@@ -6,21 +6,33 @@ public enum Browser {
     EDGE
 }
 
+//import lombok.AllArgsConstructor;
+//import lombok.Getter;
+//import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.chrome.ChromeOptions;
+//
+//@AllArgsConstructor
+//@Getter
 //public enum Browser {
-//    CHROME("chrome", true, () -> {
-//        var options = new ChromeOptions();
-//        options.addArguments("headless");
-//        return options;
-//    }, () -> new ChromeDriver(Browser.getOptions())),
+//    CHROME(
+//            "chrome",
+//            true,
+//                    () -> {
+//                        var options = new ChromeOptions();
+//                        options.addArguments("headless");
+//                        return options;
+//                    },
+//                    () -> new ChromeDriver(Browser.())),
+//
 //    EDGE(""),
-//    MOZILLA;
+//    MOZILLA
+//    ;
 //
-//    private String browserName;
-//    private Boolean headless;
-//    private static Options options;
-//    private WebDriver driver;
+//    private final String browserName;
+//    private final Boolean headless;
+//    private final ChromeOptions options;
+//    private final WebDriver driver;
 //
-//    public static Options getOptions() {
-//        return options;
-//    }
+//
 //}

@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import tests.aqa.ConfProperties;
+
 import java.time.Duration;
 
 @Log4j2
@@ -14,18 +16,19 @@ public class LoginPage {
 
     public LoginPage(WebDriver driver){
         this.driver = driver;
+        driver.get(ConfProperties.getProperty("log_page"));
     }
 
     //Set user name in textbox
     public void setUserName(String strUserName){
         log.info("set user name to " + strUserName);
-        driver.findElement(By.xpath(LoginPageLocator.USERNAME_INPUT_LOCATOR.get())).sendKeys(strUserName);
+        driver.findElement(By.xpath(LoginPageLocator.USERNAME_INPUT_LOCATOR.getLocator())).sendKeys(strUserName);
     }
 
     //Set password in password textbox
     public void setPassword(String strPassword){
         log.info("set password to " + strPassword);
-        driver.findElement(By.xpath(LoginPageLocator.PASSWORD_INPUT_LOCATOR.get())).sendKeys(strPassword);
+        driver.findElement(By.xpath(LoginPageLocator.PASSWORD_INPUT_LOCATOR.getLocator())).sendKeys(strPassword);
     }
 
     //Click on login button
@@ -33,7 +36,7 @@ public class LoginPage {
         log.info("click login");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable
-                (By.xpath(LoginPageLocator.LOGIN_BUTTON_LOCATOR.get())));
+                (By.xpath(LoginPageLocator.LOGIN_BUTTON_LOCATOR.getLocator())));
         element.click();
     }
 
@@ -62,7 +65,7 @@ public class LoginPage {
         String currentUrl = driver.getCurrentUrl();
         if (currentUrl.equals("https://aspect.t8s.ru/")){
             return new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.ERROR_REPORT_IDENTIFICATION_LOCATOR.get())))
+                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.ERROR_REPORT_IDENTIFICATION_LOCATOR.getLocator())))
                     .getText();
         }
         return currentUrl;
@@ -70,33 +73,40 @@ public class LoginPage {
 
     public String getNameLabelCompany() {
         return   new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.NAME_COMPANY_LABEL_SITE_LOCATOR.get())))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.NAME_COMPANY_LABEL_SITE_LOCATOR.getLocator())))
                 .getText();
     }
 
     public String getAttribute_FieldLogin_data_val_required() {
         return   new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.USERNAME_INPUT_LOCATOR.get())))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.USERNAME_INPUT_LOCATOR.getLocator())))
                 .getDomAttribute("data-val-required");
     }
 
 
     public boolean isDisplayed_LabelCompany() {
         return   new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.COMPANY_LABEL_SITE_LOCATOR.get())))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.COMPANY_LABEL_SITE_LOCATOR.getLocator())))
                 .isDisplayed();
     }
 
     public String getColor_LoginButton() {
-        return   new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.LOGIN_BUTTON_LOCATOR.get())))
+        String color = new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.LOGIN_BUTTON_LOCATOR.getLocator())))
                 .getCssValue("color");
+        if (color.startsWith("rgba(")) {
+            color = color.replace("rgba(", "rgb(");
+            int index = color.lastIndexOf(",");
+            color = color.substring(0, index)+")";
+        }
+        log.info("Color: " + color);
+        return color;
     }
 
     public String click_forgotPassword() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable
-                (By.xpath(LoginPageLocator.HREF_FORGOT_PASSWORD_SITE_LOCATOR.get())));
+                (By.xpath(LoginPageLocator.HREF_FORGOT_PASSWORD_SITE_LOCATOR.getLocator())));
         element.click();
        return driver.getCurrentUrl();
     }

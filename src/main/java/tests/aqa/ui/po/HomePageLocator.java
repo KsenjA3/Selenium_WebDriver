@@ -1,5 +1,10 @@
 package tests.aqa.ui.po;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public enum HomePageLocator {
     EXIT_MENU_ACCOUNT_LOCATOR ("//a[@class='dropdown-toggle']"),
     EXIT_ACCOUNT_LOCATOR ("//a[@href='/Account/LogOff']"),
@@ -7,17 +12,5 @@ public enum HomePageLocator {
     COURSE_LEFT_MENU_LOCATOR ("//span[.='Занятия']/ancestor::a[1]"),
     ITEMS_COURSE_LEFT_MENU_LOCATOR ("//span[.='Занятия']/ancestor::a/following-sibling::ul[@class='nav NavSubParent']/descendant::span"),
     ;
-
-    private String str;
-
-    HomePageLocator (String str){
-        this.str= str;
-    }
-
-    public String get (){
-        return str;
-    }
+    private String locator;
 }
-
-
-//span[.='Занятия']/ancestor::a/following-sibling::ul[@class='nav NavSubParent']

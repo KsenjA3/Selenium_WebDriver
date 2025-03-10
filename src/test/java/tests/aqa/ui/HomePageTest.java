@@ -5,10 +5,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import tests.aqa.ConfProperties;
 import tests.aqa.ui.po.HomePage;
 import tests.aqa.ui.po.LoginPage;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,7 +22,6 @@ public class HomePageTest extends BaseTest {
     @BeforeAll
     void loginToHomePage()  {
         driverSet.forEach(driver -> {
-            driver.get(ConfProperties.getProperty("log_page"));
             new LoginPage(driver).loginPage("xlyna@yandex.ru", "FVqHMbtBfnQk");
         });
     }
@@ -32,8 +29,7 @@ public class HomePageTest extends BaseTest {
     @BeforeEach
     void openPage()  {
         driverSet.forEach(driver -> {
-            driver.get(ConfProperties.getProperty("log_page"));
-            homePage=new HomePage(driver);
+            homePage = new HomePage(driver);
             log.info("The site home page " + driver.getCurrentUrl()+ " is opened");
         });
     }

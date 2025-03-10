@@ -5,7 +5,6 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import tests.aqa.ConfProperties;
 import tests.aqa.ui.po.HomePageLocator;
 import tests.aqa.ui.po.LoginPage;
 import java.time.Duration;
@@ -20,22 +19,21 @@ public class LoginPageTest extends BaseTest {
     @BeforeEach
     void openPage()  {
         driverSet.forEach(driver -> {
-            driver.get(ConfProperties.getProperty("log_page"));
             if (driver.getCurrentUrl().equals("https://aspect.t8s.ru/Student")) {
                 new WebDriverWait(driver, Duration.ofSeconds(10))
-                        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(HomePageLocator.EXIT_MENU_ACCOUNT_LOCATOR.get())))
+                        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(HomePageLocator.EXIT_MENU_ACCOUNT_LOCATOR.getLocator())))
                         .click();
                 new WebDriverWait(driver, Duration.ofSeconds(10))
-                        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(HomePageLocator.EXIT_ACCOUNT_LOCATOR.get())))
+                        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(HomePageLocator.EXIT_ACCOUNT_LOCATOR.getLocator())))
                         .click();
             }
             loginPage=new LoginPage(driver);
-            log.info("The site login page " + driver.getCurrentUrl()+ " is opened");
+            log.info("The site login page " + driver.getCurrentUrl()+ " is opened with driver " + driver);
         });
     }
 
     @Test
-    void testLoginPageTitle() {
+    void testLoginPage_Title() {
         assertEquals("Вход на сайт",loginPage.get_title());
     }
 
@@ -56,7 +54,7 @@ public class LoginPageTest extends BaseTest {
 
     @Test
     void testLoginPage_LoginButton_Color() {
-        assertEquals("rgba(255, 255, 255, 1)",loginPage.getColor_LoginButton());
+        assertEquals("rgb(255, 255, 255)",loginPage.getColor_LoginButton());
     }
 
     @Test

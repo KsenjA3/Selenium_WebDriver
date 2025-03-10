@@ -20,9 +20,11 @@ public class DriverFirefoxHandler implements DriverHandler{
         WebDriver driver=null;
 
         if (browser.equalsIgnoreCase("Firefox")) {
+//            System.setProperty("webdriver.gecko.driver", "c:/Program Files/SeleniumDrivers/selenium-java-4.29.0/geckodriver.exe");
             FirefoxOptions options = new FirefoxOptions();
             options.addArguments("-headless");
             driver = new FirefoxDriver(options);
+
             driver.manage().window().setPosition(new Point(200,200));
             log.info("Perform driver from Chain of Responsibility" + browser);
 
