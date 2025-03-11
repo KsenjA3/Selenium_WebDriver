@@ -15,8 +15,8 @@ public class GetRequest {
                 .when()
                 .get(endpoint)
                 .then()
-//                .log()
-//                .all(true)
+                .log()
+                .all(true)
                 .extract()
                 .response();
     }

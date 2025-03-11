@@ -1,123 +1,56 @@
 package tests.aqa.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import tests.aqa.api.models.LoginBody;
+import tests.aqa.api.services.LoginService;
 import tests.aqa.ui.BaseTest;
 import tests.aqa.api.requests.PostRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LoginTest extends BaseTest {
     private static final String BASE_URL = "https://catalog.onliner.by/sdapi/user.api/login";
 
-    @DisplayName("Verify login with empty data")
-    @Test
-    public void testPostEmptyEmailAndPassword() {
-
-        /**
-        * Initial data for request
-        * BASE_URL - url testing web-site
-        * body - body of request
-        * headers - HashMap <String, Object>, where
-         *            String - type of header name
-         *           Object - value of header
-         */
-        String body = """
-                {
-                    "login" : "", 
-                    "password" : ""
-                }
-                """;
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-
-        /**
-        *Expected results
-         */
-        String expectedError1 = "Validation failed";
-        String expectedError2 = "Укажите ник или e-mail";
-        String expectedError3 = "Укажите пароль";
-
-        Response response = PostRequest.makePostRequestAndGetResponse( BASE_URL, headers, body);
-        assertEquals(response.getStatusCode(), 422);
-        response.then().assertThat()
-                .body("message", equalTo(expectedError1))
-                .body("errors.login",contains(expectedError2))
-                .body("errors.password",contains(expectedError3));
+    private static Stream<Arguments> provideStringsForBodyAndExpectedResults() {
+        return Stream.of(
+                Arguments.of(" ", " ", "contains", 422, "errors.login", "Укажите ник или e-mail", "errors.password", "Укажите пароль"),
+                Arguments.of("111111", " ", "contains&equalTo", 422, "message", "Validation failed", "errors.password", "Укажите пароль" ),
+                Arguments.of(" ", "11111", "contains&equalTo", 422, "message", "Validation failed", "errors.login", "Укажите ник или e-mail"),
+                Arguments.of("111111", "111111", "equalTo", 400, "errors[0].key", "invalid_login_or_password", "errors[0].message", "Неверный логин или пароль")
+        );
     }
 
-    @DisplayName("Verify login with empty password")
-    @Test
-    public void testPostAnyEmailEmptyPassword() {
-        String body = """
-                {
-                    "login" : "111111",
-                    "password" : ""
-                }
-                """;
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
+    @ParameterizedTest (name = "Verify login = \"{0}\", password = \"{1}\", statusCode = {3}")
+    @MethodSource("provideStringsForBodyAndExpectedResults")
+    public void testVerifyDifferentOptionsOfEmailAndPassword(String login, String password, String method,
+                                                             int expectedStatusCode,
+                                                             String nameField1, String expectedResult1,
+                                                             String nameField2, String expectedResult2)  {
+        var response = new LoginService().verifyLogin(login, password);
 
-        String expectedError1 = "Validation failed";
-        String expectedError2 = "Укажите пароль";
-
-        Response response = PostRequest.makePostRequestAndGetResponse( BASE_URL, headers, body);
-        response.then().assertThat()
-                .statusCode(422)
-                .body("message", equalTo(expectedError1))
-                .body("errors.password", contains(expectedError2))
-
-        ;
-    }
-
-    @DisplayName("Verify login with empty email")
-    @Test
-    public void testPostEmptyEmailAnyPassword() {
-        String body = """
-                {
-                    "login" : "",
-                    "password" : "11111"
-                }
-                """;
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-
-        String expectedError1 = "Validation failed";
-        String expectedError2 = "Укажите ник или e-mail";
-
-        Response response = PostRequest.makePostRequestAndGetResponse( BASE_URL, headers, body);
-        response.then().assertThat()
-                .statusCode(422)
-                .body("message", equalTo(expectedError1))
-                .body("errors.login", contains(expectedError2))
-
-        ;
-    }
-
-    @DisplayName("Verify login by unregistered user")
-    @Test
-    public void testPostNonExistingCustomer() {
-        String body = """
-                {
-                    "login" : "111111",
-                    "password" : "111111"
-                }
-                """;
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("Content-Type", "application/json");
-
-        String expectedError1 = "invalid_login_or_password";
-        String expectedError2 = "Неверный логин или пароль";
-
-        Response response = PostRequest.makePostRequestAndGetResponse( BASE_URL, headers, body);
-        response.then().assertThat()
-                .statusCode(400)
-                .body("errors[0].key", equalTo(expectedError1))
-                .body("errors[0].message", equalTo(expectedError2))
-        ;
+        assertEquals(response.getStatusCode(), expectedStatusCode);
+        switch (method) {
+            case "contains"-> response.then().assertThat()
+                    .body(nameField1, contains(expectedResult1))
+                    .body(nameField2, contains(expectedResult2));
+            case "equalTo"-> response.then().assertThat()
+                    .body(nameField1, equalTo(expectedResult1))
+                    .body(nameField2, equalTo(expectedResult2));
+            case "contains&equalTo"-> response.then().assertThat()
+                    .body(nameField1, equalTo(expectedResult1))
+                    .body(nameField2, contains(expectedResult2));
+        }
     }
 
 }

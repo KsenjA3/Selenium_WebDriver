@@ -1,16 +1,17 @@
 package tests.aqa.ui;
 
 import lombok.extern.log4j.Log4j2;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import tests.aqa.ConfProperties;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverChromeHandler;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverEdgeHandler;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverFirefoxHandler;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverHandler;
+import tests.aqa.ui.drivers.singleton.Browser;
+import tests.aqa.ui.drivers.singleton.SingletonWebDriver;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +24,7 @@ public class BaseTest {
     private String[] browserList;
 
 
-    @BeforeAll
+    @BeforeEach
     void setUp() {
         /**
          *  Получаем список браузеров из системных свойств,
@@ -75,10 +76,12 @@ public class BaseTest {
          * при вызове SingletonWebDriver.getDriver(Browser.имя_браузера)
          * через паттерн Singleton
          */
-//        driverSet.add( SingletonWebDriver.getDriver(Browser.CHROME));
+//        driverSet.add( SingletonWebDriver.getDriver(ConfProperties.getProperty("drivers")));
+
+        log.info("Driver set: " + driverSet);
     }
 
-    @AfterAll
+    @AfterEach
     void tearDown() {
         /**         для I и II способа
          * Закрытие драйвера и очистка ресурсов после выполнения всех тестов
@@ -92,7 +95,7 @@ public class BaseTest {
          * при запуске UI тестов с использованием паттерна
          * Chain of Responsibility и Abstract Factory
          */
-//        SingletonWebDriver.quitDriver(Browser.CHROME);
+//        SingletonWebDriver.quitDriver(ConfProperties.getProperty("drivers"));
 
         log.info("Drivers are closed");
     }

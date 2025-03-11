@@ -1,65 +1,64 @@
 package tests.aqa.api;
 
 import io.restassured.response.Response;
+import org.json.JSONObject;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.FieldSource;
 import tests.aqa.api.requests.GetRequest;
+import tests.aqa.api.services.SearchService;
+import tests.aqa.api.services.SearchURL;
+
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class SearchTest {
-    private static final String CATALOG_URL = "https://catalog.onliner.by/";
-    private static final String AUTO_URL = "https://go.onliner.by/tiles.acp/redirect/eyJ1cmwiOiJodHRwczpcL1wvYXV0by5vbmxpbmVyLmJ5XC8yMDI1XC8wM1wvMDZcL2RvbGctemEtYXZ0b3hsYW0iLCJpbmRleCI6MiwiaWRlbnRpdHkiOiIxOjA6MDoxNzQxMjM4MTcwIn0%3D";
-    private static final String BARACHOLKA_FIND_DOM_URL = "https://baraholka.onliner.by/search.php";
-    private static final String ABOUT_COMPANY_URL = "https://blog.onliner.by/about";
+    private static SearchService service;
 
-    @DisplayName("Verify access catalog page")
-    @Test
-    public void catalogAccessTest() {
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36");
-        Response response = GetRequest.makeGetRequestAndGetResponse(CATALOG_URL, headers, null);
+    private static List<Arguments> provideArguments = Arrays.asList(
+            arguments("Verify access catalog page", SearchURL.CATALOG_URL.getUrlSearch(), 200, "<title>Каталог Onlíner</title>"),
+            arguments("Verify correct UNP on page about company", SearchURL.ABOUT_COMPANY_URL.getUrlSearch(), 200, "УНП 190657494")
+    );
 
-        assertEquals(200, response.getStatusCode());
-        assertTrue( response.getBody().asString().contains("<title>Каталог Onlíner</title>"));
+    @BeforeAll
+    static void setUp() {
+        service=new SearchService();
     }
 
+    @ParameterizedTest (name = "{0}")
+    @FieldSource("provideArguments")
+    public void searchTest(String searchText, String url, int expectedStatusCode, String expectedBody) {
+        Response response = service.verifySearch(url, null);
+
+        assertEquals(expectedStatusCode, response.getStatusCode());
+        assertTrue( response.getBody().asString().contains(expectedBody));
+    }
 
     @DisplayName("Verify header Server on AutoNews Page")
     @Test
     public void headerServerAutoNewsPageTest() {
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36");
-        Response response = GetRequest.makeGetRequestAndGetResponse(AUTO_URL, headers, null);
+        Response response = service.verifySearch(SearchURL.AUTO_URL.getUrlSearch(), null);
 
         assertEquals(200, response.getStatusCode());
-        response.then().assertThat()
-                .header("server", equalTo("nginx"));
-    }
-
-    @DisplayName("Verify correct UNP on page about company")
-    @Test
-    public void correct_UNP_onPageAboutCompany_Test() {
-        Map<String, Object> headers = new HashMap<>();
-            headers.put("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36");
-        Response response = GetRequest.makeGetRequestAndGetResponse(ABOUT_COMPANY_URL, headers, null);
-        String body = response.getBody().asString();
-
-        assertEquals(200, response.getStatusCode());
-        assertTrue(body.contains("УНП 190657494"));
+        response.then().assertThat().header("server", equalTo("nginx"));
     }
 
     @DisplayName("Verify presence in section search of BARACHOLKA item DOM")
     @Test
     public void presenceDom_inSectionSearch_ofBaracholka_Test() {
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36");
         Map<String, Object> params= new HashMap<>();
         params.put("q", "дом");
-        Response response = GetRequest.makeGetRequestAndGetResponse(BARACHOLKA_FIND_DOM_URL, headers, params);
+        Response response = service.verifySearch(SearchURL.BARACHOLKA_FIND_DOM_URL.getUrlSearch(), params);
         String body = response.getBody().asString();
 
         assertEquals(200, response.getStatusCode());

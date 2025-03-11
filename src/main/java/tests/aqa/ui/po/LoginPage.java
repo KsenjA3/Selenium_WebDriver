@@ -60,7 +60,7 @@ public class LoginPage {
         return driver.getCurrentUrl();
     }
 
-    public String tryLoginPage_returnInfoMessageOfResult(String strUserName,String strPasword){
+    public String tryLoginPageReturnInfoMessageOfResult(String strUserName,String strPasword){
         loginPage(strUserName, strPasword);
         String currentUrl = driver.getCurrentUrl();
         if (currentUrl.equals("https://aspect.t8s.ru/")){
@@ -77,20 +77,20 @@ public class LoginPage {
                 .getText();
     }
 
-    public String getAttribute_FieldLogin_data_val_required() {
+    public String getAttributeFieldLoginDataValRequired() {
         return   new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.USERNAME_INPUT_LOCATOR.getLocator())))
                 .getDomAttribute("data-val-required");
     }
 
 
-    public boolean isDisplayed_LabelCompany() {
+    public boolean isDisplayedLabelCompany() {
         return   new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.COMPANY_LABEL_SITE_LOCATOR.getLocator())))
                 .isDisplayed();
     }
 
-    public String getColor_LoginButton() {
+    public String getColorLoginButton() {
         String color = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.LOGIN_BUTTON_LOCATOR.getLocator())))
                 .getCssValue("color");
@@ -100,10 +100,11 @@ public class LoginPage {
             color = color.substring(0, index)+")";
         }
         log.info("Color: " + color);
+        log.info(driver);
         return color;
     }
 
-    public String click_forgotPassword() {
+    public String clickForgotPassword() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable
                 (By.xpath(LoginPageLocator.HREF_FORGOT_PASSWORD_SITE_LOCATOR.getLocator())));
@@ -111,7 +112,7 @@ public class LoginPage {
        return driver.getCurrentUrl();
     }
 
-    public String get_title() {
+    public String getTitle() {
         return driver.getTitle();
     }
 }

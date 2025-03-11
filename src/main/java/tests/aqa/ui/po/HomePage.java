@@ -19,7 +19,7 @@ public class HomePage {
         driver.get(ConfProperties.getProperty("log_page"));
     }
 
-    public ArrayList<String> listOfItems_course_leftMenu() {
+    public ArrayList<String> listOfItemsCourseLeftMenu() {
         ArrayList<String> arr = new ArrayList<>();
 
         new WebDriverWait(driver, Duration.ofSeconds(10))

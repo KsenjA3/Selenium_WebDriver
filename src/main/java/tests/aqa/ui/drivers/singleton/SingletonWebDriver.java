@@ -13,26 +13,26 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 public class SingletonWebDriver {
     private static volatile WebDriver driver;
 
-    public static WebDriver getDriver(Browser browser) {
+    public static WebDriver getDriver(String browser) {
         log.info("Perform driver " + browser);
         if (driver==null) {
             synchronized (WebDriver.class) {
                 if (driver == null) {
 
                     switch (browser) {
-                        case CHROME-> {
+                        case "Chrome"-> {
                             ChromeOptions options = new ChromeOptions();
                             options.addArguments("headless");
                             driver =  new ChromeDriver(options);
                         }
-                        case EDGE-> {
+                        case "Edge"-> {
                             EdgeOptions options = new EdgeOptions();
                             options.addArguments("headless");
                             driver = new EdgeDriver(options);
                         }
-                        case FIREFOX-> {
+                        case "Firefox"-> {
                             FirefoxOptions options = new FirefoxOptions();
-                            options.addArguments("headless");
+                            options.addArguments("-headless");
                             driver = new FirefoxDriver(options);
                         }
                     }
@@ -43,7 +43,7 @@ public class SingletonWebDriver {
         return driver;
     }
 
-    public static void quitDriver(Browser browser) {
+    public static void quitDriver(String browser) {
         if (driver != null) {
             driver.quit();
             driver = null;
