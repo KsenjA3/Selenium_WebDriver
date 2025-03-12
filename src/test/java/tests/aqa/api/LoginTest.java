@@ -1,26 +1,15 @@
 package tests.aqa.api;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.restassured.response.Response;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import tests.aqa.api.models.LoginBody;
 import tests.aqa.api.services.LoginService;
 import tests.aqa.ui.BaseTest;
-import tests.aqa.api.requests.PostRequest;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Stream;
-
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LoginTest extends BaseTest {
-    private static final String BASE_URL = "https://catalog.onliner.by/sdapi/user.api/login";
 
     private static Stream<Arguments> provideStringsForBodyAndExpectedResults() {
         return Stream.of(
@@ -37,7 +26,7 @@ public class LoginTest extends BaseTest {
                                                              int expectedStatusCode,
                                                              String nameField1, String expectedResult1,
                                                              String nameField2, String expectedResult2)  {
-        var response = new LoginService().verifyLogin(login, password);
+        var response = new LoginService().login(login, password);
 
         assertEquals(response.getStatusCode(), expectedStatusCode);
         switch (method) {
@@ -52,5 +41,4 @@ public class LoginTest extends BaseTest {
                     .body(nameField2, contains(expectedResult2));
         }
     }
-
 }

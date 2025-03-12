@@ -5,13 +5,11 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.aqa.api.po.OnlinerAboutPage;
 import tests.aqa.api.requests.GetRequest;
 import tests.aqa.ui.BaseTest;
-import tests.aqa.ui.po.HomePageLocator;
 
 import java.time.Duration;
 import java.util.*;

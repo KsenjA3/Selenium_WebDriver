@@ -8,10 +8,6 @@ import tests.aqa.ui.drivers.chainOfResponsibility.DriverChromeHandler;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverEdgeHandler;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverFirefoxHandler;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverHandler;
-import tests.aqa.ui.drivers.singleton.Browser;
-import tests.aqa.ui.drivers.singleton.SingletonWebDriver;
-
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 

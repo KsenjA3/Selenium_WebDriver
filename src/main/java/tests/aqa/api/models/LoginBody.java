@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class LoginBody {
-    String login;
-    String password;
+    private String login;
+    private String password;
 }

@@ -1,11 +1,8 @@
 package tests.aqa.api.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.Response;
 import lombok.extern.log4j.Log4j2;
 import org.json.JSONObject;
-import tests.aqa.api.models.LoginBody;
 import tests.aqa.api.requests.PostRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +11,7 @@ import java.util.Map;
 public class LoginService {
     private static final String BASE_URL = "https://catalog.onliner.by/sdapi/user.api/login";
 
-    public Response verifyLogin(String login, String password)  {
+    public Response login(String login, String password)  {
         Map<String, Object> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
         String jsonBody;
