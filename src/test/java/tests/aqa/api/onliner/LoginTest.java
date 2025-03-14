@@ -1,9 +1,9 @@
-package tests.aqa.api;
+package tests.aqa.api.onliner;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import tests.aqa.api.services.LoginService;
+import tests.aqa.api.onliner.services.LoginService;
 import tests.aqa.ui.BaseTest;
 import java.util.stream.Stream;
 import static org.hamcrest.Matchers.*;

@@ -1,16 +1,16 @@
-package tests.aqa.ui;
+package tests.aqa.ui.aspect;
 
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import tests.aqa.ui.po.HomePageLocator;
-import tests.aqa.ui.po.LoginPage;
+import tests.aqa.ui.BaseTest;
+import tests.aqa.ui.po.aspect.HomePageLocator;
+import tests.aqa.ui.po.aspect.LoginPage;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -35,9 +35,6 @@ public class LoginPageTest extends BaseTest {
             log.info("The site login page " + driver.getCurrentUrl()+ " is opened with driver " + driver);
         });
         log.info("The login page " + loginPages);
-    }
-    private Stream<LoginPage> provideLoginPages() {
-        return loginPages.stream();
     }
 
     @Test

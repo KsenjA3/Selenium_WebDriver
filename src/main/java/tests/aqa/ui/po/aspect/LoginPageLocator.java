@@ -1,4 +1,4 @@
-package tests.aqa.ui.po;
+package tests.aqa.ui.po.aspect;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package tests.aqa.api.po;
+package tests.aqa.api.onliner.po;
 
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;

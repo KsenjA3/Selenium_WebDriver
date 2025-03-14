@@ -1,7 +1,7 @@
-package tests.aqa.api.services;
+package tests.aqa.api.onliner.services;
 
 import io.restassured.response.Response;
-import tests.aqa.api.requests.GetRequest;
+import tests.aqa.api.onliner.requests.GetRequest;
 import java.util.HashMap;
 import java.util.Map;
 

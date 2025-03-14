@@ -1,9 +1,9 @@
-package tests.aqa.api.services;
+package tests.aqa.api.onliner.services;
 
 import io.restassured.response.Response;
 import lombok.extern.log4j.Log4j2;
 import org.json.JSONObject;
-import tests.aqa.api.requests.PostRequest;
+import tests.aqa.api.onliner.requests.PostRequest;
 import java.util.HashMap;
 import java.util.Map;
 

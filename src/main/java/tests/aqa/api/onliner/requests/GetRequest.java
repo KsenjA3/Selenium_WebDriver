@@ -1,4 +1,4 @@
-package tests.aqa.api.requests;
+package tests.aqa.api.onliner.requests;
 
 import io.restassured.response.Response;
 import java.util.Map;

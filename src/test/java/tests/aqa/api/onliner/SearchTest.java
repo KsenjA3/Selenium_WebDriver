@@ -1,4 +1,4 @@
-package tests.aqa.api;
+package tests.aqa.api.onliner;
 
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.FieldSource;
-import tests.aqa.api.services.SearchService;
-import tests.aqa.api.services.SearchURL;
+import tests.aqa.api.onliner.services.SearchService;
+import tests.aqa.api.onliner.services.SearchURL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -51,7 +51,7 @@ public class SearchTest {
 
     @DisplayName("Verify presence in section search of BARACHOLKA item DOM")
     @Test
-    public void presenceDom_inSectionSearch_ofBaracholka_Test() {
+    public void presenceDomInSectionSearchOfBaracholkaTest() {
         Map<String, Object> params= new HashMap<>();
         params.put("q", "дом");
         Response response = service.search(SearchURL.BARACHOLKA_FIND_DOM_URL.getUrlSearch(), params);

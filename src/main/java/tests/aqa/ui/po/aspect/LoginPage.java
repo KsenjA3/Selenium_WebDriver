@@ -1,4 +1,4 @@
-package tests.aqa.ui.po;
+package tests.aqa.ui.po.aspect;
 
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;

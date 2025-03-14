@@ -1,3 +1,9 @@
+drivers : Chrome
+
 shop_page : https://demowebshop.tricentis.com
 log_page : https://aspect.t8s.ru
-drivers : Firefox,Chrome,Edge
+
+stream_page : https://store.steampowered.com
+stream_country : По всему миру
+stream_position : 1
+

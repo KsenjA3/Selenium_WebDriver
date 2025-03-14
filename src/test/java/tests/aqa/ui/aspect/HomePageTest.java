@@ -1,11 +1,11 @@
-package tests.aqa.ui;
+package tests.aqa.ui.aspect;
 
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import tests.aqa.ui.po.HomePage;
-import tests.aqa.ui.po.LoginPage;
+import tests.aqa.ui.BaseTest;
+import tests.aqa.ui.po.aspect.HomePage;
+import tests.aqa.ui.po.aspect.LoginPage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Log4j2
 public class HomePageTest extends BaseTest {
     Set<HomePage> homePages;

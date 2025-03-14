@@ -1,4 +1,4 @@
-package tests.aqa.api;
+package tests.aqa.api.onliner;
 
 import io.restassured.response.Response;
 import lombok.extern.log4j.Log4j2;
@@ -7,8 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import tests.aqa.api.po.OnlinerAboutPage;
-import tests.aqa.api.requests.GetRequest;
+import tests.aqa.api.onliner.po.OnlinerAboutPage;
+import tests.aqa.api.onliner.requests.GetRequest;
 import tests.aqa.ui.BaseTest;
 
 import java.time.Duration;

@@ -1,4 +1,4 @@
-package tests.aqa.api.po;
+package tests.aqa.api.onliner.po;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

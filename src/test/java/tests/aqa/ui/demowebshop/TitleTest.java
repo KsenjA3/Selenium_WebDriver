@@ -1,8 +1,6 @@
-package tests.aqa.ui;
+package tests.aqa.ui.demowebshop;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import tests.aqa.ConfProperties;
@@ -12,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TitleTest{
     WebDriver driver;
 
-    @BeforeEach
+    @BeforeTest
     void setUp() {
         driver = new ChromeDriver();
         driver.get(ConfProperties.getProperty("shop_page"));
     }
 
-    @AfterEach
+    @AfterTest
     void tearDown() {
         driver.quit();
     }
@@ -26,5 +24,14 @@ public class TitleTest{
     @Test
     void title() {
         assertEquals("Demo Web Shop",driver.getTitle());
+    }
+
+    @Test
+    void failTest1() {
+        assertEquals(1,2);
+    }
+    @Test
+    void failTest2() {
+        assertEquals(3,2);
     }
 }

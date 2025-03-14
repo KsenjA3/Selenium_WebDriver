@@ -1,4 +1,4 @@
-package tests.aqa.ui.po;
+package tests.aqa.ui.po.aspect;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
