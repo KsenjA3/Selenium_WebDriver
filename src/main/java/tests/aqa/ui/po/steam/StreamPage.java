@@ -39,18 +39,18 @@ public class StreamPage {
 
     public Integer getAmountGamersInGame(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        return StreamPage.getNumberFromString(wait.until(ExpectedConditions.presenceOfElementLocated(
+        return getNumberFromString(wait.until(ExpectedConditions.presenceOfElementLocated(
                 By.xpath(NUMBER_IN_GAME_LOCATOR.getLocator()))).getText());
     }
 
     public Integer getAmountGamersOnline(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        return StreamPage.getNumberFromString(wait.until(ExpectedConditions.presenceOfElementLocated(
+        return getNumberFromString(wait.until(ExpectedConditions.presenceOfElementLocated(
                 By.xpath(NUMBER_ONLINE_LOCATOR.getLocator()))).getText());
     }
 
-    private static Integer getNumberFromString(String initString) {
-        String numder= initString.substring(initString.indexOf('\n')+1);
+    private  Integer getNumberFromString(String initString) {
+        String numder = initString.substring(initString.indexOf('\n')+1);
         numder = numder.replace(",","");
         return Integer.parseInt(numder);
     }
@@ -117,7 +117,8 @@ public class StreamPage {
             if (elmText.equals("Бесплатно") || elmText.equals("")) elmText = "0";
 
             arrCostOfBestTenGames.add(Double.parseDouble(elmText.replace("$","")
-                    .replace("€","").replace(",",".")));
+                    .replace("€","").replace(",",".")
+                    .replace("Предзаказ","")));
         }
         return arrCostOfBestTenGames;
     }
@@ -158,12 +159,30 @@ public class StreamPage {
 
     public void  getInfoAboutGames() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        log.info("The Game developer is "+wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath(DEVELOPER_GAME.getLocator()))).getText());
-        log.info("The Game data of edit is "+wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath(DATA_EDITION.getLocator()))).getText());
-        log.info("The Game main genre is "+wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath(MAIN_GENRE_OF_GAME.getLocator()))).getText());
+        log.info("The Game developer is "+getGameDeveloper());
+        log.info("The Game data of edit is "+getGameDataEdition());
+        log.info("The Game main genre are "+getMainGenreOfGame());
+    }
+
+    public String  getGameDeveloper() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+       return wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath(DEVELOPER_GAME.getLocator()))).getText();
+    }
+
+    public String  getGameDataEdition() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+         return wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath(DATA_EDITION.getLocator()))).getText();
+    }
+
+    public List<String>  getMainGenreOfGame() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        ArrayList<String> arrMainGenreOfGame = new ArrayList<>();
+        List<WebElement> mainGenreOfGameWebElements = wait.until(ExpectedConditions
+                .visibilityOfAllElementsLocatedBy(By.xpath(MAIN_GENRE_OF_GAME.getLocator())));
+        for (WebElement elm : mainGenreOfGameWebElements)  arrMainGenreOfGame.add(elm.getText());
+        return arrMainGenreOfGame;
     }
 }
 

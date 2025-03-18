@@ -20,7 +20,7 @@ public class BaseTest {
     private String[] browserList;
 
 
-    @BeforeEach
+    @BeforeAll
     void setUp() {
         /**
          *  Получаем список браузеров из системных свойств,
@@ -77,7 +77,7 @@ public class BaseTest {
         log.info("Driver set: " + driverSet);
     }
 
-    @AfterEach
+    @AfterAll
     void tearDown() {
         /**         для I и II способа
          * Закрытие драйвера и очистка ресурсов после выполнения всех тестов

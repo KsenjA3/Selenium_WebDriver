@@ -1,64 +1,48 @@
 package tests.aqa.ui.stream;
 
 import lombok.extern.log4j.Log4j2;
+import org.testng.annotations.*;
 import tests.aqa.ConfProperties;
-import tests.aqa.ui.BaseTest;
+import tests.aqa.ui.BaseTestNG;
 import tests.aqa.ui.po.steam.StreamPage;
 import java.util.ArrayList;
-import java.util.List;
-import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Log4j2
-public class StreamTest extends BaseTest {
-    private List<StreamPage> streamPages;
+public class StreamTestNG extends BaseTestNG {
+    StreamPage streamPage;
 
-    @BeforeAll
-    void openPage()  {
-        streamPages = new ArrayList<>();
-        driverSet.forEach(driver -> {
-            StreamPage streamPage = new StreamPage(driver);
-            streamPages.add(streamPage);
-            log.info("The site stream page " + driver.getCurrentUrl()+ " is opened with driver " + driver);
-        });
-        log.info("The stream page " + streamPages);
+    @BeforeMethod
+    public void setStreamPage(){
+        streamPage = new StreamPage(driver);
+        log.info("StreamPage is created for" + driver);
     }
 
-    @DisplayName("Verify title Stream Page About")
-    @Test
+    @Test (description = "Verify title Stream Page About")
     void testStreamPageTitle() {
-        streamPages.forEach(streamPage -> {
             streamPage.clickLButtonAbout();
             assertEquals("Steam — превосходная игровая Интернет-платформа",streamPage.getTitle());
-        });
     }
 
-    @DisplayName("Verify URL Stream Page About")
-    @Test
+    @Test (description = "Verify URL Stream Page About")
     void testStreamPageURL() {
-        streamPages.forEach(streamPage -> {
             streamPage.clickLButtonAbout();
             assertEquals("https://store.steampowered.com/about/",streamPage.getURL());
-        });
     }
 
-    @DisplayName("Compare amount of gamers in Network and in Game")
-    @Test
+    @Test (description = "Compare amount of gamers in Network and in Game")
     void testAmountOfGamersInNetworkAndGame() {
-        streamPages.forEach(streamPage -> {
             streamPage.clickLButtonAbout();
             Integer amountInGame = streamPage.getAmountGamersInGame();
             Integer amountOnline = streamPage.getAmountGamersOnline();
             log.info("amount in Game is "+amountInGame+",  amount online is "+ amountOnline);
 
             assertTrue(amountInGame<amountOnline);
-        });
     }
 
-    @DisplayName("Verify title and cost of the best game in selected country")
-    @Test
+    @Test (description = "Verify title and cost of the best game in selected country")
     void  getTitlesAndPriceForFirstTenGames() {
-        streamPages.forEach(streamPage -> {
             int position = Integer.parseInt(ConfProperties.getProperty("stream_position"));
             streamPage.moveToPageOfSelectedCountryTopSellers(ConfProperties.getProperty("stream_country"));
             ArrayList<String> arrNameOfBestTenGames = streamPage.getListOfNameTheBestGames();
@@ -70,7 +54,5 @@ public class StreamTest extends BaseTest {
             assertEquals(arrNameOfBestTenGames.get(position-1),streamPage.getNameGameOnItsOwnPage());
             assertEquals(arrCostOfBestTenGames.get(position-1),streamPage.getCostGameOnItsOwnPage());
             streamPage.getInfoAboutGames();
-        });
-
     }
 }
