@@ -17,7 +17,7 @@ public class FormPage {
         formSubmit = new FormSubmit(driver);
     }
 
-    public void fillFullFormOfPage (String firstName, String lastName, String gender,  String phoneNumber,
+    public void fillFullInputForm (String firstName, String lastName, String gender,  String phoneNumber,
                                     String email, String dateOfBirth, String subject, String hobbies,
                                     String filePath, String address,  String state, String city) {
         formInput.setFirstName(firstName)
@@ -35,5 +35,53 @@ public class FormPage {
                 .clickSubmitButton();
     }
 
+    public void fillRequiredFieldsInputForm (String firstName, String lastName, String gender, String phoneNumber) {
+        formInput.setFirstName(firstName)
+                .setLastName(lastName)
+                .setGender(gender)
+                .setPhoneNumber(phoneNumber)
+                .clickSubmitButton();
+    }
 
+    public void fillRequiredFieldsInputFormAndEmail (String firstName, String lastName, String gender, String phoneNumber, String email) {
+        formInput.setFirstName(firstName)
+                .setLastName(lastName)
+                .setGender(gender)
+                .setPhoneNumber(phoneNumber)
+                .setEmail(email)
+                .clickSubmitButton();
+    }
+
+    public void fillInputFormWithoutGender (String firstName, String lastName, String gender,
+                                                                     String phoneNumber, String email, String dateOfBirth,
+                                                                     String subject, String hobbies, String address,
+                                                                     String state, String city) {
+        formInput.setFirstName(firstName)
+                .setLastName(lastName)
+                .setPhoneNumber(phoneNumber)
+                .setEmail(email)
+                .setDateOfBirth(dateOfBirth)
+                .setSubject(subject)
+                .setAddress(address)
+                .setHobby(hobbies)
+                .setStates(state)
+                .setCity(city)
+                .clickSubmitButton();
+    }
+
+    public void fillInputFormWithoutGender (String firstName, String lastName, String phoneNumber, String email,
+                                               String dateOfBirth, String subject, String hobbies, String address,
+                                               String state, String city) {
+        formInput.setFirstName(firstName)
+                .setLastName(lastName)
+                .setPhoneNumber(phoneNumber)
+                .setEmail(email)
+                .setDateOfBirth(dateOfBirth)
+                .setSubject(subject)
+                .setAddress(address)
+                .setHobby(hobbies)
+                .setStates(state)
+                .setCity(city)
+                .clickSubmitButton();
+    }
 }

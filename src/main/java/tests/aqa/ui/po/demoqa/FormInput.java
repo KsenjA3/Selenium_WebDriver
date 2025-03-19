@@ -76,14 +76,29 @@ public final class FormInput {
     }
 
     public FormInput setGender(String gender) {
-        String genderLocator = String.format("%s%s%s",
-                GENDER_PART1_LOCATOR.getLocator(), gender,GENDER_PART3_LOCATOR.getLocator());
-
-        this.gender =driver.findElement(By.xpath(genderLocator));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", this.gender);
+        findGenderLabel(gender);
         wait.until(ExpectedConditions.elementToBeClickable(this.gender)).click();
         return this;
+    }
+
+    public String getColorGender(String gender) {
+        findGenderLabel(gender);
+    String color = this.gender.getCssValue("color");
+        if (color.startsWith("rgba(")) {
+            color = color.replace("rgba(", "rgb(");
+            int index = color.lastIndexOf(",");
+            color = color.substring(0, index)+")";
+        }
+       log.info("Selected color gender: " + color);
+       return color;
+    }
+
+    private void findGenderLabel (String gender) {
+        String genderLocator = String.format("%s%s%s",
+                GENDER_PART1_LOCATOR.getLocator(), gender,GENDER_PART3_LOCATOR.getLocator());
+        this.gender =driver.findElement(By.xpath(genderLocator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", this.gender);
     }
 
     public FormInput setEmail(String email) {

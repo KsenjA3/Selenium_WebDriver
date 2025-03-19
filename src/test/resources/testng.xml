@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Stream" parallel="false"  thread-count="16">
+<suite name="Stream" parallel="classes" thread-count="4">
 
     <test name="ChromeTest">
         <parameter name="browser" value="Chrome"/>
         <classes>
             <class name="tests.aqa.ui.stream.StreamTestNG"/>
+            <class name="tests.aqa.ui.stream.StreamTestNG1"/>
         </classes>
     </test>
 

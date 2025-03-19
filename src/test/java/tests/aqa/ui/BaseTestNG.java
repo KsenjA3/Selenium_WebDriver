@@ -8,14 +8,13 @@ import tests.aqa.ui.drivers.factoryDriver.DriverManager;
 @Log4j2
 public abstract class BaseTestNG {
     protected WebDriver driver;
-    private DriverManager driverManager;
+    private static DriverManager driverManager;
 
-    @BeforeClass
+    @BeforeSuite
     public void setUp (){
-        driverManager = new DriverManager();
-        log.info("DriverManager is created" + driverManager);
+            driverManager = new DriverManager();
+            log.info("DriverManager is created - " + driverManager);
     }
-
 
     @Parameters({"browser"})
     @BeforeMethod

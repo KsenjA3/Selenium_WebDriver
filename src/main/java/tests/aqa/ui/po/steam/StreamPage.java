@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.aqa.ConfProperties;
@@ -79,6 +80,15 @@ public class StreamPage {
                 wait.until(ExpectedConditions.elementToBeClickable(By.xpath(POPUP_COUNTRY.getLocator())));
         popupSelectionCountry.click();
 
+
+//        try {  Thread.sleep(1000);} catch (InterruptedException e) {  throw new RuntimeException(e); }
+//        WebElement popupSelectionCountry = driver.findElement(By.xpath(POPUP_COUNTRY.getLocator()));
+//        Actions actions = new Actions(driver);
+//        try {  Thread.sleep(1000);} catch (InterruptedException e) {  throw new RuntimeException(e); }
+//        actions.moveToElement(popupSelectionCountry).doubleClick().perform();
+
+
+
         /**
          * Choose TOP_SALLERS in popup menu NEW_AND_INTERESTING
          */
@@ -86,6 +96,7 @@ public class StreamPage {
                 wait.until(ExpectedConditions.elementToBeClickable(
                         By.xpath(SELECTED_COUNTRY.getLocator() + country + "')]")));
         elementSelectionCountryInPopup.click();
+//        try {  Thread.sleep(1000);} catch (InterruptedException e) {  throw new RuntimeException(e); }
         log.info("TOP_SALLERS page is "+driver.getCurrentUrl());
     }
 

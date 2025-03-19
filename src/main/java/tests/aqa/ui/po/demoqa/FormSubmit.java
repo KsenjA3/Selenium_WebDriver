@@ -58,6 +58,10 @@ public class FormSubmit {
         return successNotification.getText();
     }
 
+    public Boolean isPresenceSubmittingForm() {
+        return driver.findElement(By.cssSelector(POPUP_SUBMIT_PAGE_LOCATOR.getLocator())).isDisplayed();
+    }
+
     public String getFullName() {
         return fullName.getText();
     }
