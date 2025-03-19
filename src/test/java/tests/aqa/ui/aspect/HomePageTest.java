@@ -2,7 +2,6 @@ package tests.aqa.ui.aspect;
 
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tests.aqa.ui.BaseTest;
 import tests.aqa.ui.po.aspect.HomePage;

@@ -1,11 +1,16 @@
 package tests.aqa.ui.po.demoqa;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import tests.aqa.ConfProperties;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+import static tests.aqa.ui.po.demoqa.FormPageLocator.POPUP_SUBMIT_PAGE_LOCATOR;
+import static tests.aqa.ui.po.demoqa.FormPageLocator.SUCCESS_NOTIFICATION_SUBMIT_PAGE_LOCATOR;
 
+@Log4j2
 public class FormSubmit {
     private WebDriver driver;
 
@@ -14,7 +19,6 @@ public class FormSubmit {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(id = "example-modal-sizes-title-lg")
     private WebElement successNotification;
 
     @FindBy(xpath = "//td[text()='Student Name']/following-sibling::td")
@@ -47,8 +51,11 @@ public class FormSubmit {
     @FindBy(xpath = "//td[text()='State and City']/following-sibling::td")
     private WebElement stateAndCity;
 
-    public Boolean getSuccessNotification() {
-        return successNotification.getText().equals("Thanks for submitting the form");
+    public String checkSuccessNotification() {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(POPUP_SUBMIT_PAGE_LOCATOR.getLocator())));
+            successNotification = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(SUCCESS_NOTIFICATION_SUBMIT_PAGE_LOCATOR.getLocator())));
+        return successNotification.getText();
     }
 
     public String getFullName() {
@@ -75,7 +82,7 @@ public class FormSubmit {
         return subjects.getText();
     }
 
-    public String getHobby() {
+    public String getHobbies() {
         return hobby.getText();
     }
 
@@ -90,6 +97,4 @@ public class FormSubmit {
     public String getStateAndCity() {
         return stateAndCity.getText();
     }
-
-
 }

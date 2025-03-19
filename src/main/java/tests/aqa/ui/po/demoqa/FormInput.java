@@ -1,8 +1,5 @@
 package tests.aqa.ui.po.demoqa;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -50,16 +47,16 @@ public final class FormInput {
    @FindBy(id = "currentAddress")
    private WebElement address;
 
-   @FindBy(id = "state")
+   @FindBy(id = "react-select-3-input")
    private WebElement listStates;
 
-   @FindBy(id = "react-select-3-option-0")
+   @FindBy(xpath = "//div[contains(@id,'react-select-3-option')]")
    private WebElement state;
 
-   @FindBy(id = "city")
+   @FindBy(id = "react-select-4-input")
    private WebElement listCities;
 
-   @FindBy(id = "react-select-4-option-0")
+    @FindBy(xpath = "//div[contains(@id,'react-select-4-option')]")
    private WebElement city;
 
    @FindBy(id = "submit")
@@ -72,21 +69,35 @@ public final class FormInput {
        this.firstName.sendKeys(firstName);
        return this;
    }
+
     public FormInput setLastName(String lastName) {
         this.lastName.sendKeys(lastName);
         return this;
     }
+
+    public FormInput setGender(String gender) {
+        String genderLocator = String.format("%s%s%s",
+                GENDER_PART1_LOCATOR.getLocator(), gender,GENDER_PART3_LOCATOR.getLocator());
+
+        this.gender =driver.findElement(By.xpath(genderLocator));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", this.gender);
+        wait.until(ExpectedConditions.elementToBeClickable(this.gender)).click();
+        return this;
+    }
+
     public FormInput setEmail(String email) {
        this.email.sendKeys(email);
        return this;
     }
+
     public FormInput setPhoneNumber(String phoneNumber) {
        this.phoneNumber.sendKeys(phoneNumber);
        return this;
     }
+
     public FormInput setDateOfBirth(String dateOfBirth) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", this.dateOfBirth);
-
         this.dateOfBirth.sendKeys(Keys.CONTROL + "a");
 //        this.dateOfBirth.sendKeys(Keys.DELETE);
 //        this.dateOfBirth.sendKeys("\b\b\b\b\b\b\b\b\b\b");
@@ -96,6 +107,7 @@ public final class FormInput {
         this.dateOfBirth.click();
        return this;
     }
+
     public FormInput setSubject(String subjects) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", this.subjectInput);
@@ -106,42 +118,45 @@ public final class FormInput {
         });
         return this;
     }
+
     public FormInput setPicture (String filePath) {
-//        this.picture.sendKeys(filePath);
+        this.picture.sendKeys(filePath);
         return this;
     }
+
     public FormInput setAddress(String address) {
-//       this.address.sendKeys(address);
+       this.address.sendKeys(address);
        return this;
     }
+
     public FormInput setStates(String state) {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        wait.until(ExpectedConditions.elementToBeClickable(this.listStates)).click();
-//
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", this.listStates);
+        this.listStates.sendKeys(state);
+        wait.until(ExpectedConditions.elementToBeClickable(this.state)).click();
         return this;
     }
 
     public FormInput setCity(String city) {
-
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.listCities.sendKeys(city);
+        wait.until(ExpectedConditions.elementToBeClickable(this.city)).click();
         return this;
     }
 
-    public FormInput setHobby(String hobby) {
+    public FormInput setHobby(String hobbies) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        String[] hobbiesArray = hobbies.split(", ");
 
-       return this;
+        Arrays.stream(hobbiesArray).forEach(hobby -> {
+            String hobbyLocator = String.format("%s%s%s",
+                    HOBBY_PART1_LOCATOR.getLocator(), hobby,HOBBY_PART2_LOCATOR.getLocator());
+            this.hobby =driver.findElement(By.xpath(hobbyLocator));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", this.hobby);
+            wait.until(ExpectedConditions.elementToBeClickable(this.hobby)).click();
+        });
+        return this;
     }
-
-     public FormInput setGender(String gender) {
-         String genderLocator = String.format("%s%s%s",
-                 GENDER_PART1_LOCATOR.getLocator(), gender,GENDER_PART3_LOCATOR.getLocator());
-
-         this.gender =driver.findElement(By.xpath(genderLocator));
-         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", this.gender);
-         wait.until(ExpectedConditions.elementToBeClickable(this.gender)).click();
-         return this;
-     }
-
 
      public void clickSubmitButton() {
          WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

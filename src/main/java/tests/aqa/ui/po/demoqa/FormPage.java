@@ -10,18 +10,15 @@ public class FormPage {
     private FormInput formInput;
     private FormSubmit formSubmit;
 
-
-
     public FormPage(WebDriver driver){
         this.driver = driver;
         driver.get(ConfProperties.getProperty("demoqa_form_page"));
         formInput = new FormInput(driver);
         formSubmit = new FormSubmit(driver);
-
     }
 
     public void fillFullFormOfPage (String firstName, String lastName, String gender,  String phoneNumber,
-                                    String email, String dateOfBirth, String subject, String hobby,
+                                    String email, String dateOfBirth, String subject, String hobbies,
                                     String filePath, String address,  String state, String city) {
         formInput.setFirstName(firstName)
                 .setLastName(lastName)
@@ -30,11 +27,11 @@ public class FormPage {
                 .setEmail(email)
                 .setDateOfBirth(dateOfBirth)
                 .setSubject(subject)
-//                .setPicture(filePath)
-//                .setAddress(address)
-//                .setHobby(hobby)
-//                .setStates(state)
-//                .setCity(city)
+                .setPicture(filePath)
+                .setAddress(address)
+                .setHobby(hobbies)
+                .setStates(state)
+                .setCity(city)
                 .clickSubmitButton();
     }
 
