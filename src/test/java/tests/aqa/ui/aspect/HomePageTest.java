@@ -1,5 +1,6 @@
 package tests.aqa.ui.aspect;
 
+import io.qameta.allure.Allure;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import tests.aqa.ui.po.aspect.LoginPageAspect;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,12 +23,12 @@ public class HomePageTest extends BaseTest {
 
     @BeforeAll
     void openPage()  {
-        homePages = new HashSet<>();
-        driverSet.forEach(driver -> {
-            new LoginPageAspect(driver).loginPage("xlyna@yandex.ru", "FVqHMbtBfnQk");
-            homePages.add(new HomePageAspect(driver));
-            log.info("The site home page " + driver.getCurrentUrl()+ " is opened");
-        });
+            homePages = new HashSet<>();
+            driverSet.forEach(driver -> {
+                new LoginPageAspect(driver).loginPage("xlyna@yandex.ru", "FVqHMbtBfnQk");
+                homePages.add(new HomePageAspect(driver));
+                log.info("The site home page " + driver.getCurrentUrl()+ " is opened");
+            });
     }
 
     @Test

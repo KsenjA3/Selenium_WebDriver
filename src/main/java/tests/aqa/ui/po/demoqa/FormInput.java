@@ -177,13 +177,18 @@ public final class FormInput {
     }
 
      public void clickSubmitButton() {
-         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", this.submitButton);
-//         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-         Wait<WebDriver> wait = new FluentWait<>(driver)
-                 .withTimeout(Duration.ofSeconds(10))
-                 .pollingEvery(Duration.ofSeconds(1))
-                 .ignoring(Exception.class);
+       //до середины элемента
+         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", this.submitButton);
+       // до низа страницы
+         ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight);");
 
+         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//         Wait<WebDriver> wait = new FluentWait<>(driver)
+//                 .withTimeout(Duration.ofSeconds(10))
+//                 .pollingEvery(Duration.ofSeconds(1))
+//                 .ignoring(Exception.class);
+
+         //locator рекламы
          //iframe[contains(@id,'google_ads_iframe_/21849154601,22343295815/Ad.Plus-Anchor_0')]
 
          wait.until(ExpectedConditions.elementToBeClickable(this.submitButton)).click();

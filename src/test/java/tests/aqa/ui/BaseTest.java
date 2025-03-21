@@ -1,5 +1,6 @@
 package tests.aqa.ui;
 
+import io.qameta.allure.Allure;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
@@ -8,6 +9,8 @@ import tests.aqa.ui.drivers.chainOfResponsibility.DriverChromeHandler;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverEdgeHandler;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverFirefoxHandler;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverHandler;
+
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,9 +31,9 @@ public class BaseTest {
          *  в которой названия браузеров представлены виде строки
          *  и перечисляются через запятую         *
          */
-        String browsers = System.getProperty("browsers", ConfProperties.getProperty("drivers"));
-        browserList = browsers.split(",");
-        driverSet = new HashSet<WebDriver>();
+            String browsers = System.getProperty("browsers", ConfProperties.getProperty("drivers"));
+            browserList = browsers.split(",");
+            driverSet = new HashSet<WebDriver>();
 
         /**
          *                      I СПОСОБ
