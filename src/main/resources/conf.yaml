@@ -2,7 +2,8 @@ drivers : Chrome,Firefox,Edge
 list_drivers : Chrome,Firefox,Edge
 
 shop_page : https://demowebshop.tricentis.com
-log_page : https://aspect.t8s.ru
+
+aspect_page : https://aspect.t8s.ru
 
 stream_page : https://store.steampowered.com
 stream_country : По всему миру
@@ -10,3 +11,7 @@ stream_position : 1
 
 demoqa_form_page : https://demoqa.com/automation-practice-form
 
+saucedemo_login_page : https://www.saucedemo.com
+saucedemo_home_page : https://www.saucedemo.com/inventory.html
+saucedemo_usermane : standard_user
+saucedemo_password : secret_sauce

@@ -2,7 +2,7 @@ package tests.aqa.ui.po.demoqa;
 
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
-import tests.aqa.ConfProperties;
+import tests.aqa.utils.ConfProperties;
 
 @Getter
 public class FormPage {

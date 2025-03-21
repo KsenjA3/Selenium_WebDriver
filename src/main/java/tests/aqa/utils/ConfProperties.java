@@ -1,4 +1,4 @@
-package tests.aqa;
+package tests.aqa.utils;
 
 import lombok.extern.log4j.Log4j2;
 

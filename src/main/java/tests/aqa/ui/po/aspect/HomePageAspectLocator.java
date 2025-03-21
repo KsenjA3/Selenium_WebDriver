@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum HomePageLocator {
+public enum HomePageAspectLocator {
     EXIT_MENU_ACCOUNT_LOCATOR ("//a[@class='dropdown-toggle']"),
     EXIT_ACCOUNT_LOCATOR ("//a[@href='/Account/LogOff']"),
     LEFT_MENU_LOCATOR ("//aside"),

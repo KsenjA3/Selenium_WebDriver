@@ -51,14 +51,13 @@ public class FormSubmit {
     @FindBy(xpath = "//td[text()='State and City']/following-sibling::td")
     private WebElement stateAndCity;
 
-    public String checkSuccessNotification() {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(POPUP_SUBMIT_PAGE_LOCATOR.getLocator())));
-            successNotification = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(SUCCESS_NOTIFICATION_SUBMIT_PAGE_LOCATOR.getLocator())));
-        return successNotification.getText();
+    public Boolean checkIsPresenceSubmitForm() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        successNotification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(POPUP_SUBMIT_PAGE_LOCATOR.getLocator())));
+        return successNotification.isDisplayed();
     }
 
-    public Boolean isPresenceSubmittingForm() {
+    public Boolean isPresenceSubmitForm() {
         return driver.findElement(By.cssSelector(POPUP_SUBMIT_PAGE_LOCATOR.getLocator())).isDisplayed();
     }
 

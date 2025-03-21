@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum LoginPageLocator {
+public enum LoginPageAspectLocator {
     USERNAME_INPUT_LOCATOR ("//*[@id='LogLogin']"),
     PASSWORD_INPUT_LOCATOR ("//*[@id='LogPassword']"),
     LOGIN_BUTTON_LOCATOR ("//button[@type='submit']"),

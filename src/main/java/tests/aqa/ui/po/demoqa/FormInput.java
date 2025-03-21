@@ -5,9 +5,12 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.Arrays;
+
 
 import static tests.aqa.ui.po.demoqa.FormPageLocator.*;
 
@@ -174,8 +177,15 @@ public final class FormInput {
     }
 
      public void clickSubmitButton() {
-         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
          ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", this.submitButton);
+//         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+         Wait<WebDriver> wait = new FluentWait<>(driver)
+                 .withTimeout(Duration.ofSeconds(10))
+                 .pollingEvery(Duration.ofSeconds(1))
+                 .ignoring(Exception.class);
+
+         //iframe[contains(@id,'google_ads_iframe_/21849154601,22343295815/Ad.Plus-Anchor_0')]
+
          wait.until(ExpectedConditions.elementToBeClickable(this.submitButton)).click();
      }
 }

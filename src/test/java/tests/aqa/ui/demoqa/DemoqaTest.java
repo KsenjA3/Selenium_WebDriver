@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Log4j2
 public class DemoqaTest extends BaseTest {
@@ -45,7 +46,9 @@ public class DemoqaTest extends BaseTest {
             formPage.fillFullInputForm (firstName, lastName, gender, phoneNumber,
                     email, dateOfBirth, subjects, hobbies,filePathAbsolute, address, state, city);
 
-            log.info("Submitting title is - " +formPage.getFormSubmit().checkSuccessNotification());
+//            log.info("Submitting title is - " +formPage.getFormSubmit().checkSuccessNotification());
+
+            assertTrue(formPage.getFormSubmit().checkIsPresenceSubmitForm(), "Submitting form is not Displayed on driver " + formPage.getDriver());
 
             assertEquals(expectedFullName,formPage.getFormSubmit().getFullName(),
                     "The full names in full filling InputForm and SubmitForm are different on driver "+ formPage.getDriver());
@@ -82,7 +85,8 @@ public class DemoqaTest extends BaseTest {
             String expectedFullName = firstName+" "+lastName;
             formPage.fillRequiredFieldsInputForm (firstName, lastName, gender, phoneNumber);
 
-            log.info("Submitting title is - " +formPage.getFormSubmit().checkSuccessNotification());
+//            log.info("Submitting title is - " +formPage.getFormSubmit().checkSuccessNotification());
+            assertTrue(formPage.getFormSubmit().checkIsPresenceSubmitForm(), "Submitting form is not Displayed on driver " + formPage.getDriver());
 
             assertEquals(expectedFullName,formPage.getFormSubmit().getFullName(),
                     "The full names in InputForm and SubmitForm are different, when require fields only fill, on driver "+ formPage.getDriver());
@@ -116,7 +120,7 @@ public class DemoqaTest extends BaseTest {
         formPages.forEach(formPage -> {
             formPage.fillInputFormWithoutGender (firstName, lastName, phoneNumber, email, dateOfBirth, subjects, hobbies, address, state, city);
             assertThrows( NoSuchElementException.class,
-                    ()->{ formPage.getFormSubmit().isPresenceSubmittingForm(); },
+                    ()->{ formPage.getFormSubmit().isPresenceSubmitForm(); },
                     "Submitting form is Displayed, when Gender is not set on driver "+ formPage.getDriver()
             );
         });
@@ -140,7 +144,7 @@ public class DemoqaTest extends BaseTest {
             formPage.fillRequiredFieldsInputFormAndEmail (firstName, lastName, gender, phoneNumber, email);
 
             assertThrows( NoSuchElementException.class,
-                    ()->{ formPage.getFormSubmit().isPresenceSubmittingForm(); },
+                    ()->{ formPage.getFormSubmit().isPresenceSubmitForm(); },
                     "Submitting form is Displayed, when invalid data fills the email "+email+" field Input Form on driver "+ formPage.getDriver()
             );
         });
@@ -166,7 +170,7 @@ public class DemoqaTest extends BaseTest {
             formPage.fillRequiredFieldsInputForm  (firstName, lastName, gender, phoneNumber);
 
             assertThrows( NoSuchElementException.class,
-                    ()->{ formPage.getFormSubmit().isPresenceSubmittingForm(); },
+                    ()->{ formPage.getFormSubmit().isPresenceSubmitForm(); },
                     "Submitting form is Displayed, when invalid phone number fills Input Form, on driver "+ formPage.getDriver()
             );
         });

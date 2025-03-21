@@ -6,29 +6,29 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import tests.aqa.ConfProperties;
+import tests.aqa.utils.ConfProperties;
 
 import java.time.Duration;
 
 @Log4j2
-public class LoginPage {
+public class LoginPageAspect {
     private WebDriver driver;
 
-    public LoginPage(WebDriver driver){
+    public LoginPageAspect(WebDriver driver){
         this.driver = driver;
-        driver.get(ConfProperties.getProperty("log_page"));
+        driver.get(ConfProperties.getProperty("aspect_page"));
     }
 
     //Set user name in textbox
     public void setUserName(String strUserName){
         log.info("set user name to " + strUserName);
-        driver.findElement(By.xpath(LoginPageLocator.USERNAME_INPUT_LOCATOR.getLocator())).sendKeys(strUserName);
+        driver.findElement(By.xpath(LoginPageAspectLocator.USERNAME_INPUT_LOCATOR.getLocator())).sendKeys(strUserName);
     }
 
     //Set password in password textbox
     public void setPassword(String strPassword){
         log.info("set password to " + strPassword);
-        driver.findElement(By.xpath(LoginPageLocator.PASSWORD_INPUT_LOCATOR.getLocator())).sendKeys(strPassword);
+        driver.findElement(By.xpath(LoginPageAspectLocator.PASSWORD_INPUT_LOCATOR.getLocator())).sendKeys(strPassword);
     }
 
     //Click on login button
@@ -36,7 +36,7 @@ public class LoginPage {
         log.info("click login");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable
-                (By.xpath(LoginPageLocator.LOGIN_BUTTON_LOCATOR.getLocator())));
+                (By.xpath(LoginPageAspectLocator.LOGIN_BUTTON_LOCATOR.getLocator())));
         element.click();
     }
 
@@ -65,7 +65,7 @@ public class LoginPage {
         String currentUrl = driver.getCurrentUrl();
         if (currentUrl.equals("https://aspect.t8s.ru/")){
             return new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.ERROR_REPORT_IDENTIFICATION_LOCATOR.getLocator())))
+                    .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageAspectLocator.ERROR_REPORT_IDENTIFICATION_LOCATOR.getLocator())))
                     .getText();
         }
         return currentUrl;
@@ -73,26 +73,26 @@ public class LoginPage {
 
     public String getNameLabelCompany() {
         return   new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.NAME_COMPANY_LABEL_SITE_LOCATOR.getLocator())))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageAspectLocator.NAME_COMPANY_LABEL_SITE_LOCATOR.getLocator())))
                 .getText();
     }
 
     public String getAttributeFieldLoginDataValRequired() {
         return   new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.USERNAME_INPUT_LOCATOR.getLocator())))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageAspectLocator.USERNAME_INPUT_LOCATOR.getLocator())))
                 .getDomAttribute("data-val-required");
     }
 
 
     public boolean isDisplayedLabelCompany() {
         return   new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.COMPANY_LABEL_SITE_LOCATOR.getLocator())))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageAspectLocator.COMPANY_LABEL_SITE_LOCATOR.getLocator())))
                 .isDisplayed();
     }
 
     public String getColorLoginButton() {
         String color = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageLocator.LOGIN_BUTTON_LOCATOR.getLocator())))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(LoginPageAspectLocator.LOGIN_BUTTON_LOCATOR.getLocator())))
                 .getCssValue("color");
         if (color.startsWith("rgba(")) {
             color = color.replace("rgba(", "rgb(");
@@ -107,7 +107,7 @@ public class LoginPage {
     public String clickForgotPassword() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable
-                (By.xpath(LoginPageLocator.HREF_FORGOT_PASSWORD_SITE_LOCATOR.getLocator())));
+                (By.xpath(LoginPageAspectLocator.HREF_FORGOT_PASSWORD_SITE_LOCATOR.getLocator())));
         element.click();
        return driver.getCurrentUrl();
     }

@@ -2,7 +2,7 @@ package tests.aqa.ui.stream;
 
 import lombok.extern.log4j.Log4j2;
 import org.testng.annotations.*;
-import tests.aqa.ConfProperties;
+import tests.aqa.utils.ConfProperties;
 import tests.aqa.ui.BaseTestNG;
 import tests.aqa.ui.po.steam.StreamPage;
 import java.util.ArrayList;

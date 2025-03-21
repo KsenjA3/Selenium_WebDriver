@@ -3,7 +3,7 @@ package tests.aqa.ui;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import tests.aqa.ConfProperties;
+import tests.aqa.utils.ConfProperties;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverChromeHandler;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverEdgeHandler;
 import tests.aqa.ui.drivers.chainOfResponsibility.DriverFirefoxHandler;

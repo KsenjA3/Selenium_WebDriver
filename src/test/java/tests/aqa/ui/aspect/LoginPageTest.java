@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.aqa.ui.BaseTest;
-import tests.aqa.ui.po.aspect.HomePageLocator;
-import tests.aqa.ui.po.aspect.LoginPage;
+import tests.aqa.ui.po.aspect.HomePageAspectLocator;
+import tests.aqa.ui.po.aspect.LoginPageAspect;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Log4j2
 public class LoginPageTest extends BaseTest {
-    List<LoginPage> loginPages;
+    List<LoginPageAspect> loginPages;
 
     @BeforeEach
     void openPage()  {
@@ -25,13 +25,13 @@ public class LoginPageTest extends BaseTest {
         driverSet.forEach(driver -> {
             if (driver.getCurrentUrl().equals("https://aspect.t8s.ru/Student")) {
                 new WebDriverWait(driver, Duration.ofSeconds(10))
-                        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(HomePageLocator.EXIT_MENU_ACCOUNT_LOCATOR.getLocator())))
+                        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(HomePageAspectLocator.EXIT_MENU_ACCOUNT_LOCATOR.getLocator())))
                         .click();
                 new WebDriverWait(driver, Duration.ofSeconds(10))
-                        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(HomePageLocator.EXIT_ACCOUNT_LOCATOR.getLocator())))
+                        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(HomePageAspectLocator.EXIT_ACCOUNT_LOCATOR.getLocator())))
                         .click();
             }
-            loginPages.add(new LoginPage(driver));
+            loginPages.add(new LoginPageAspect(driver));
             log.info("The site login page " + driver.getCurrentUrl()+ " is opened with driver " + driver);
         });
         log.info("The login page " + loginPages);
