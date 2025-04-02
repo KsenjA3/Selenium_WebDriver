@@ -17,6 +17,12 @@ services:
     image: jenkins/inbound-agent
     container_name: jenkins-agent
     environment:
+      - JENKINS_IMAGE="jenkins/jenkins:lts"
+      - CONTAINER_NAME="jenkins-server"
+      - JENKINS_PORT="8080"
+      - JENKINS_AGENT_PORT="50000"
+      - VOLUME_NAME="jenkins_home"
+      - CONFIG_DIR="$(pwd)/jenkins_configuration"
       - JENKINS_ADMIN_PASSWORD=wsxcde32!QAZ
       - JENKINS_URL=http://jenkins-server:8080
       - JENKINS_AGENT_NAME=agent
