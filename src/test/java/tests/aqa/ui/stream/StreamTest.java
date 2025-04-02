@@ -50,8 +50,9 @@ public class StreamTest extends BaseTest {
             Integer amountInGame = streamPage.getAmountGamersInGame();
             Integer amountOnline = streamPage.getAmountGamersOnline();
             log.info("amount in Game is "+amountInGame+",  amount online is "+ amountOnline);
-
-            assertTrue(amountInGame<amountOnline);
+            assertTrue(amountInGame < amountOnline,
+                    "Amount of gamers in game should be less than online amount. Actual values - In Game: " +
+                            amountInGame + ", Online: " + amountOnline);
         });
     }
 

@@ -178,7 +178,7 @@ public final class FormInput {
 
      public void clickSubmitButton() {
        //до середины элемента
-         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", this.submitButton);
+//         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", this.submitButton);
        // до низа страницы
          ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight);");
 
@@ -190,7 +190,9 @@ public final class FormInput {
 
          //locator рекламы
          //iframe[contains(@id,'google_ads_iframe_/21849154601,22343295815/Ad.Plus-Anchor_0')]
-
+//         driver.switchTo().frame()
+//         JavascriptExecutor js = (JavascriptExecutor) driver;
+//         js.executeScript("document.querySelector('iframe').style.display='none';");
          wait.until(ExpectedConditions.elementToBeClickable(this.submitButton)).click();
      }
 }
