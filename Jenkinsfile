@@ -32,7 +32,24 @@ pipeline {
         }
         stage('Cleanup Old Jenkins Container') {
             steps {
-                scr...вязкой портов и монтированием volume
+                script {
+                    // Остановка и удаление старого контейнера, если он существует
+                    def existingContainer = sh(script: "docker ps -a -q -f name=${JENKINS_CONTAINER_NAME}", returnStdout: true).trim()
+
+                    if (existingContainer) {
+                        echo "Stopping and removing existing container ${JENKINS_CONTAINER_NAME}..."
+                        sh "docker stop ${existingContainer} || true"
+                        sh "docker rm -f ${existingContainer} || true"
+                    } else {
+                        echo "No existing container with name ${JENKINS_CONTAINER_NAME} found."
+                    }
+                }
+            }
+        }
+        stage('Run Jenkins Container') {
+            steps {
+                script {
+                    // Запуск Jenkins контейнера с привязкой портов и монтированием volume
                     sh '''
                     docker run -d --name ${JENKINS_CONTAINER_NAME} \
                       -p ${JENKINS_PORT}:8080 \
