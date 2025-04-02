@@ -1,4 +1,4 @@
-version: '3.8'
+#version: '3.8'
 
 services:
   jenkins:
@@ -8,7 +8,8 @@ services:
       - "8080:8080"
       - "50000:50000"
     volumes:
-      - jenkins_home:/var/jenkins_home
+      - jenkins_home:/var/jenkins_home                      # 1
+      - ./jenkins.yaml:/var/jenkins_home/jenkins.yaml       # 2
     networks:
       - jenkins-network
 
@@ -16,6 +17,7 @@ services:
     image: jenkins/inbound-agent
     container_name: jenkins-agent
     environment:
+      - JENKINS_ADMIN_PASSWORD=wsxcde32!QAZ
       - JENKINS_URL=http://jenkins-server:8080
       - JENKINS_AGENT_NAME=agent
       - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
