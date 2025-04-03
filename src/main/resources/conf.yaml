@@ -1,4 +1,4 @@
-drivers : Chrome,Firefox,Edge
+drivers : Chrome
 list_drivers : Chrome,Firefox,Edge
 
 shop_page : https://demowebshop.tricentis.com

@@ -7,6 +7,10 @@ pipeline {
         JENKINS_PORT = '8080'
         JENKINS_VOLUME = 'jenkins_home'
     }
+    tools {
+        maven
+        jdk
+    }
 
     stages {
         stage('Setup Docker') {
@@ -71,6 +75,8 @@ pipeline {
                 }
             }
         }
+
+
     }
 
     post {

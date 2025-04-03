@@ -1,15 +1,15 @@
 #version: '3.8'
-#
+
+# 1 нет пароля
 #services:
 #  jenkins:
 #    image: jenkins/jenkins:lts
 #    container_name: jenkins-server
 #    ports:
-#      - "8080:8080"
+#      - "8081:8080"
 #      - "50000:50000"
 #    volumes:
-#      - jenkins_home:/var/jenkins_home                      # 1
-#      - ./jenkins.yaml:/var/jenkins_home/jenkins.yaml       # 2
+#      - jenkins_home:/var/jenkins_home
 #    networks:
 #      - jenkins-network
 #
@@ -17,11 +17,9 @@
 #    image: jenkins/inbound-agent
 #    container_name: jenkins-agent
 #    environment:
-#      - JENKINS_ADMIN_PASSWORD=wsxcde32!QAZ
 #      - JENKINS_URL=http://jenkins-server:8080
 #      - JENKINS_AGENT_NAME=agent
 #      - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
-#      - JENKINS_SECRET=d7e0ebd3d8d6106d2da3c200d38baa5e56fe99e98cfc41e1e7e5dc96471415c5  # Укажите секрет здесь
 #    volumes:
 #      - agent_workdir:/home/jenkins/agent
 #    depends_on:
@@ -36,25 +34,64 @@
 #networks:
 #  jenkins-network:
 
+#  docker exec -it jenkins-server1 cat /var/jenkins_home/secrets/initialAdminPassword
 
-version: '3.8'
-
+# 2
 services:
   jenkins:
-    build: .
+    image: jenkins/jenkins:lts
+    container_name: jenkins-server2
     ports:
-      - "8081:8080"
-      - "50001:50000"
+      - "8082:8080"
+      - "50000:50000"
     volumes:
-      - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
+      - ./jenkins.yaml:/var/jenkins_home/jenkins.yaml
+    networks:
+      - jenkins-network
+
+  jenkins-agent:
+    image: jenkins/inbound-agent
+    container_name: jenkins-agent2
     environment:
-      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+      - JENKINS_ADMIN_PASSWORD=wsxcde32!QAZ
+      - JENKINS_URL=http://jenkins-server2:8080
+      - JENKINS_AGENT_NAME=agent2
+      - JENKINS_AGENT_WORKDIR=/home/jenkins2/agent2
+      - JENKINS_SECRET=d7e0ebd3d8d6106d2da3c200d38baa5e56fe99e98cfc41e1e7e5dc96471415c5  # Укажите секрет здесь
+    volumes:
+      - agent_workdir:/home/jenkins/agent
+    depends_on:
+      - jenkins
     networks:
       - jenkins-network
 
 volumes:
   jenkins_home:
+  agent_workdir:
 
 networks:
   jenkins-network:
+
+
+
+
+# 3
+#services:
+#  jenkins:
+#    build: .
+#    ports:
+#      - "8081:8080"
+#      - "50001:50000"
+#    volumes:
+#      - jenkins_home:/var/jenkins_home
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    environment:
+#      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+#    networks:
+#      - jenkins-network
+#
+#volumes:
+#  jenkins_home:
+#
+#networks:
+#  jenkins-network:
