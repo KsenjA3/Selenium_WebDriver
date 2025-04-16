@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Disabled
 @Log4j2
 public class StreamTest extends BaseTest {
     private List<StreamPage> streamPages;

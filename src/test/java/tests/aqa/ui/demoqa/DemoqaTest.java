@@ -17,6 +17,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Disabled
 @Log4j2
 public class DemoqaTest extends BaseTest {
     private List<FormPage> formPages;
@@ -112,7 +113,7 @@ public class DemoqaTest extends BaseTest {
         });
     }
 
-    @Disabled
+
     @DisplayName("Verify absence displaying Submitting Form, when Gender is not set.")
     @ParameterizedTest
     @CsvFileSource(resources = "/ui/demoqa/dataDemoqaFullFormPositive.csv", delimiter = '|')

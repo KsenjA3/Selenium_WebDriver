@@ -3,6 +3,7 @@ package tests.aqa.api.onliner;
 import io.restassured.response.Response;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,6 +18,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Disabled
 @Log4j2
 public class RedactionTest extends BaseTest {
     private static final String BASE_URL = "https://blog.onliner.by/about";

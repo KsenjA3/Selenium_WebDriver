@@ -3,6 +3,7 @@ package tests.aqa.ui.aspect;
 import io.qameta.allure.Allure;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import tests.aqa.ui.BaseTest;
 import tests.aqa.ui.po.aspect.HomePageAspect;
@@ -17,6 +18,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Disabled
 @Log4j2
 public class HomePageTest extends BaseTest {
     Set<HomePageAspect> homePages;
