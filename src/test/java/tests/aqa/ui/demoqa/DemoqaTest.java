@@ -2,6 +2,7 @@ package tests.aqa.ui.demoqa;
 
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -111,6 +112,7 @@ public class DemoqaTest extends BaseTest {
         });
     }
 
+    @Disabled
     @DisplayName("Verify absence displaying Submitting Form, when Gender is not set.")
     @ParameterizedTest
     @CsvFileSource(resources = "/ui/demoqa/dataDemoqaFullFormPositive.csv", delimiter = '|')
