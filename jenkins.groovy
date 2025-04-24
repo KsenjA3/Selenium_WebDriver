@@ -60,7 +60,7 @@ def getTestStages(testTags) {
 
 def runTestWithTag(String tag) {
     try {
-        labelledShell(label: "Run ${tag}", script: "chmod +x mvnw \n./mvnw -DskipTests ${tag}")
+        labelledShell(label: "Run ${tag}", script: "mvn clean test -DskipTests ${tag}")
     } finally {
         echo "some failed tests"
     }
