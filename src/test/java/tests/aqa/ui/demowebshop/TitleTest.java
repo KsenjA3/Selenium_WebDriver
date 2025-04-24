@@ -1,5 +1,6 @@
 package tests.aqa.ui.demowebshop;
 
+import org.junit.jupiter.api.Tag;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,6 +8,7 @@ import tests.aqa.utils.ConfProperties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Tag("UI")
 public class TitleTest{
     WebDriver driver;
 
