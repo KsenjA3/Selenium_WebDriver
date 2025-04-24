@@ -57,10 +57,12 @@ def getTestStages(testTags) {
     return stages
 }
 
+def mvnHome = tool name: 'maven jenkins', type: 'Maven'
 
 def runTestWithTag(String tag) {
     try {
-        labelledShell(label: "Run ${tag}", script: "mvn clean test -DskipTests ${tag}")
+//        sh "${mvnHome}/bin/mvn clean install"
+        labelledShell(label: "Run ${tag}", script: "${mvnHome}/bin/mvn clean test -DskipTests ${tag}")
     } finally {
         echo "some failed tests"
     }
