@@ -22,9 +22,19 @@
 #--volume jenkins-docker-certs:/certs/client:ro
 #--publish 8090:8080
 #--publish 50000:50000
-#myjenkins-blueocean:2.492.3-1
+# myjenkins-blueocean:2.492.3-1
 
 # docker exec -it jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
+#1 docker exec --user root -it jenkins-blueocean bash
+#2 git clone ...
+#3 ssh-keygen -t rsa -b 2048 -C "jenkins git key"
+# password wsxcde32
+#4 public key
+#cat /root/.ssh/id_rsa.pub
+#5 private key
+#cat /root/.ssh/id_rsa
+
+
 
 #FROM jenkins/jenkins:2.492.3-jdk17
 FROM jenkins/jenkins:2.430-jdk21
