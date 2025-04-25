@@ -32,7 +32,7 @@ pipeline {
 
         post {
             always {
-                junit 'target/allure-results'
+                junit 'target/surefire-reports/*.xml'
             }
             succeeded {
 
