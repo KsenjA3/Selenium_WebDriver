@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     tools {
-            maven 'Maven 3.9.0'  // Укажите вашу версию Maven
+            maven 'maven jenkins'  // Укажите вашу версию Maven
         }
 
     stages {
