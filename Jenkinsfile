@@ -4,7 +4,7 @@ pipeline {
 
     environment {
             mavenHome = tool name: 'maven jenkins', type: 'Maven'  // Указание пути к Maven
-        }
+    }
 
     stages {
         stage('Build') {
@@ -38,7 +38,8 @@ pipeline {
                             results: [[path: 'target/allure-results']]
                         ])
                     }
-                }
+        }
+    }
 
     post {
         always {
