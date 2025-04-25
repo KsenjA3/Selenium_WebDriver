@@ -14,12 +14,12 @@ pipeline {
                 // Add test execution steps here (e.g., mvn test)
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-                // Add deployment steps here (e.g., deploy to server)
-            }
-        }
+//         stage('Deploy') {
+//             steps {
+//                 echo 'Deploying application...'
+//                 // Add deployment steps here (e.g., deploy to server)
+//             }
+//         }
     }
 
     post {
