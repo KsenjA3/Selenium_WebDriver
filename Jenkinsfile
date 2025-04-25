@@ -20,6 +20,23 @@ pipeline {
                 // Add deployment steps here (e.g., deploy to server)
             }
         }
+
+        post {
+            always {
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    results: [[path: 'target/allure-results']]
+                ])
+            }
+            succeeded {
+
+            }
+
+            failure {
+
+            }
+        }
     }
 
     post {
