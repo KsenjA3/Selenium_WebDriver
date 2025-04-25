@@ -20,7 +20,11 @@ pipeline {
 
 
                 // Используем mavenHome для вызова Maven
-                sh '${mavenHome}/bin/mvn clean test'
+                node {
+                    script {
+                        sh "${mavenHome}/bin/mvn clean test"
+                    }
+                }
 
             }
         }
@@ -32,11 +36,13 @@ pipeline {
         }
         stage('Allure Report') {
                     steps {
-                        allure([
-                            includeProperties: false,
-                            jdk: '',
-                            results: [[path: 'target/allure-results']]
-                        ])
+                        node {
+                            allure([
+                                includeProperties: false,
+                                jdk: '',
+                                results: [[path: 'target/allure-results']]
+                            ])
+                        }
                     }
         }
     }
@@ -45,11 +51,16 @@ pipeline {
         always {
             echo 'Cleaning up...'
             // Add cleanup steps here
-            junit 'target/surefire-reports/*.xml'
+
+            node {
+                junit 'target/surefire-reports/*.xml'
+            }
         }
+
         success {
             echo 'Build and deployment succeeded!'
         }
+
         failure {
             echo 'Something went wrong!'
         }
