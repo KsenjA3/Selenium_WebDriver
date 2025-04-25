@@ -18,10 +18,10 @@ pipeline {
                 echo 'Running tests...'
                 // Add test execution steps here (e.g., mvn test)
 
-                script {
-                    // Используем mavenHome для вызова Maven
-                    sh "${mavenHome}/bin/mvn clean test"
-                }
+
+                // Используем mavenHome для вызова Maven
+                sh '${mavenHome}/bin/mvn clean test'
+
             }
         }
         stage('Deploy') {
