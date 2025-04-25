@@ -40,24 +40,11 @@ pipeline {
                     }
                 }
 
-        post {
-            always {
-                junit 'target/surefire-reports/*.xml'
-            }
-            succeeded {
-
-            }
-
-            failure {
-
-            }
-        }
-    }
-
     post {
         always {
             echo 'Cleaning up...'
             // Add cleanup steps here
+            junit 'target/surefire-reports/*.xml'
         }
         success {
             echo 'Build and deployment succeeded!'
