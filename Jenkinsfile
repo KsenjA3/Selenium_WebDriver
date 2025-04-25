@@ -41,15 +41,17 @@ pipeline {
         }
 
         stage('Test') {
+
+            when {
+                 expression {
+                        params.executeTests ==true
+                 }
+            }
+
             steps {
                 echo 'Running tests...'
                 // Add test execution steps here (e.g., mvn test)
 
-                when {
-                     expression {
-                           params.executeTests ==true
-                     }
-                }
                 // Используем mavenHome для вызова Maven
                 sh 'mvn clean test'
             }
