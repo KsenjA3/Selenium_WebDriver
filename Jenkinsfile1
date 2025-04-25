@@ -2,9 +2,9 @@ pipeline {
 
     agent any
 
-    tools {
-            maven 'Maven 3.9.0'  // Укажите вашу версию Maven
-        }
+    environment {
+            mavenHome = tool name: 'maven jenkins', type: 'Maven'  // Указание пути к Maven
+    }
 
     stages {
         stage('Build') {
@@ -13,32 +13,37 @@ pipeline {
                 // Add build steps here (e.g., mvn clean install)
             }
         }
-
         stage('Test') {
             steps {
                 echo 'Running tests...'
                 // Add test execution steps here (e.g., mvn test)
 
+
                 // Используем mavenHome для вызова Maven
-                sh 'mvn clean test'
+                node {
+                    script {
+                        sh "${mavenHome}/bin/mvn clean test"
+                    }
+                }
+
             }
         }
-
         stage('Deploy') {
             steps {
                 echo 'Deploying application...'
                 // Add deployment steps here (e.g., deploy to server)
             }
         }
-
         stage('Allure Report') {
-            steps {
-                allure([
-                    includeProperties: false,
-                    jdk: '',
-                    results: [[path: 'target/allure-results']]
-                ])
-            }
+                    steps {
+                        node {
+                            allure([
+                                includeProperties: false,
+                                jdk: '',
+                                results: [[path: 'target/allure-results']]
+                            ])
+                        }
+                    }
         }
     }
 
@@ -47,7 +52,9 @@ pipeline {
             echo 'Cleaning up...'
             // Add cleanup steps here
 
-            junit 'target/surefire-reports/*.xml'
+            node {
+                junit 'target/surefire-reports/*.xml'
+            }
         }
 
         success {
