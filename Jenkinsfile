@@ -20,14 +20,19 @@ pipeline {
                 // Add deployment steps here (e.g., deploy to server)
             }
         }
+        stage('Allure Report') {
+                    steps {
+                        allure([
+                            includeProperties: false,
+                            jdk: '',
+                            results: [[path: 'target/allure-results']]
+                        ])
+                    }
+                }
 
         post {
             always {
-                allure([
-                    includeProperties: false,
-                    jdk: '',
-                    results: [[path: 'target/allure-results']]
-                ])
+                junit 'target/allure-results'
             }
             succeeded {
 
