@@ -1,5 +1,10 @@
 pipeline {
+
     agent any
+
+    environment {
+            mavenHome = tool name: 'maven jenkins', type: 'Maven'  // Указание пути к Maven
+        }
 
     stages {
         stage('Build') {
@@ -12,6 +17,11 @@ pipeline {
             steps {
                 echo 'Running tests...'
                 // Add test execution steps here (e.g., mvn test)
+
+                script {
+                    // Используем mavenHome для вызова Maven
+                    sh "${mavenHome}/bin/mvn clean test"
+                }
             }
         }
         stage('Deploy') {
