@@ -11,6 +11,7 @@ public class DriverManager {
             case "Chrome"-> driver = new DriverFactoryChrome();
             case "Firefox"->  driver = new DriverFactoryMozilla();
             case "Edge"->  driver = new DriverFactoryEdge();
+            case "Safari"->  driver = new DriverFactorySafari();
             default -> {
                 log.error("Unknown browser " + browser);
                 driver = null;

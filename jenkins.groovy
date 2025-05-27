@@ -71,10 +71,9 @@ def runTestWithTag(String tag) {
 def getProject(String repo, String branch) {
     cleanWs()
     checkout scm: [
-            $class           : 'GitSCM', branches: [[name: branch]],
-            userRemoteConfigs: [[
-                                        url: repo
-                                ]]
+            $class  : 'GitSCM',
+            branches: [[name: branch]],
+            userRemoteConfigs: [[ url: repo ]]
     ]
 }
 
