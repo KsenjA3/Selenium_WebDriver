@@ -16,7 +16,8 @@
 
         <!-- test ui -->
         <selenium.version>4.29.0</selenium.version>
-        <webdrivermanager.version>5.9.3</webdrivermanager.version>
+        <webdrivermanager.version>6.1.0</webdrivermanager.version>
+        <selenide.version>7.9.3</selenide.version>
         <!-- test api -->
         <restassured.version>5.5.1</restassured.version>
         <!-- tests -->
@@ -52,7 +53,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.36</version>
-<!--            <scope>provided</scope>-->
+        <!--<scope>provided</scope>-->
         </dependency>
 
         <!-- logging -->
@@ -72,6 +73,19 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
+        </dependency>
+        <!-- webdrivermanager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+        </dependency>
+
+        <!-- selenide -->
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
         </dependency>
 
         <!-- rest-assured -->
@@ -113,6 +127,7 @@
             <version>${suite.version}</version>
             <scope>test</scope>
         </dependency>
+
         <!-- mockito -->
         <dependency>
             <groupId>org.mockito</groupId>
@@ -157,6 +172,8 @@
         </dependency>
     </dependencies>
 
+
+
     <build>
         <plugins>
             <plugin>
@@ -184,6 +201,8 @@
                     <testFailureIgnore>false</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        --add-opens java.base/java.lang=ALL-UNNAMED
+                        --add-opens java.base/java.util=ALL-UNNAMED
                     </argLine>
                     <systemPropertyVariables>
                         <property>
@@ -213,6 +232,12 @@
                     <reportVersion>2.6.0</reportVersion>
                 </configuration>
             </plugin>
+
+
+
+
+
+
         </plugins>
     </build>
 </project>
