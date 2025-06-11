@@ -14,3 +14,4 @@ public enum HomePageAspectLocator {
     ;
     private String locator;
 }
+//input[@name='query']

@@ -17,9 +17,11 @@
         <!-- test ui -->
         <selenium.version>4.33.0</selenium.version>
         <webdrivermanager.version>6.1.0</webdrivermanager.version>
+        <selenide.version>7.9.3</selenide.version>
 
         <!-- test Accessibility  -->
         <axe-core.selenium.version>4.10.1</axe-core.selenium.version>
+
 
         <!-- test api -->
         <restassured.version>5.5.1</restassured.version>
@@ -84,6 +86,19 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
+        </dependency>
+        <!-- webdrivermanager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
+        </dependency>
+
+        <!-- selenide -->
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
         </dependency>
 
         <!-- rest-assured -->
@@ -167,14 +182,6 @@
             <artifactId>json</artifactId>
             <version>20250107</version>
         </dependency>
-
-        <!-- com.deque.html.axe-core/selenium -->
-        <dependency>
-            <groupId>com.deque.html.axe-core</groupId>
-            <artifactId>selenium</artifactId>
-            <version>${axe-core.selenium.version}</version>
-        </dependency>
-
     </dependencies>
 
     <build>
