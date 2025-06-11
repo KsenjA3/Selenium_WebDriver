@@ -81,12 +81,7 @@
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
         </dependency>
-        <!-- io.github.bonigarcia/webdrivermanager -->
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>${webdrivermanager.version}</version>
-        </dependency>
+
         <!-- webdrivermanager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
@@ -100,6 +95,14 @@
             <artifactId>selenide</artifactId>
             <version>${selenide.version}</version>
         </dependency>
+
+        <!-- com.deque.html.axe-core/selenium -->
+        <dependency>
+            <groupId>com.deque.html.axe-core</groupId>
+            <artifactId>selenium</artifactId>
+            <version>${axe-core.selenium.version}</version>
+        </dependency>
+
 
         <!-- rest-assured -->
         <dependency>
@@ -182,6 +185,8 @@
             <artifactId>json</artifactId>
             <version>20250107</version>
         </dependency>
+
+
     </dependencies>
 
     <build>
