@@ -15,14 +15,20 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- test ui -->
-        <selenium.version>4.29.0</selenium.version>
-        <webdrivermanager.version>5.9.3</webdrivermanager.version>
+        <selenium.version>4.33.0</selenium.version>
+        <webdrivermanager.version>6.1.0</webdrivermanager.version>
+
+        <!-- test Accessibility  -->
+        <axe-core.selenium.version>4.10.1</axe-core.selenium.version>
+
         <!-- test api -->
         <restassured.version>5.5.1</restassured.version>
+
         <!-- tests -->
         <junit.version>5.11.4</junit.version>
         <assertj.version>3.27.3</assertj.version>
         <suite.version>1.11.4</suite.version>
+
         <!-- logs -->
         <log4j.version>2.24.1</log4j.version>
         <!-- reports -->
@@ -72,6 +78,12 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
+        </dependency>
+        <!-- io.github.bonigarcia/webdrivermanager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>${webdrivermanager.version}</version>
         </dependency>
 
         <!-- rest-assured -->
@@ -155,6 +167,14 @@
             <artifactId>json</artifactId>
             <version>20250107</version>
         </dependency>
+
+        <!-- com.deque.html.axe-core/selenium -->
+        <dependency>
+            <groupId>com.deque.html.axe-core</groupId>
+            <artifactId>selenium</artifactId>
+            <version>${axe-core.selenium.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
