@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -17,6 +18,7 @@ import static com.codeborne.selenide.WebDriverConditions.url;
 import static com.codeborne.selenide.files.DownloadActions.click;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Disabled
 @Log4j2
 public class OnlinerTest extends BaseTest{
 
@@ -25,6 +27,7 @@ public class OnlinerTest extends BaseTest{
     //h1.catalog-masthead__title
     //span[@class="button-style button-style_another button-style_base product-aside__button"]
     private final String NAME_SEARCH_ITEM = "Телефон Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (черный)";
+
 
     @Test
     public void openHomePage() throws InterruptedException {

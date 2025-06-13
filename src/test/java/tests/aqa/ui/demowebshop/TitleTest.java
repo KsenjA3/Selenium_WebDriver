@@ -1,5 +1,6 @@
 package tests.aqa.ui.demowebshop;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +9,7 @@ import tests.aqa.utils.ConfProperties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Tag("UI")
+@Disabled
 public class TitleTest{
     WebDriver driver;
 

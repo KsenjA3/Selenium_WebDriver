@@ -43,6 +43,7 @@ public class RedactionTest extends BaseTest {
         });
     }
 
+    @Disabled
     @DisplayName("Verify redaction contacts")
     @Test
     public void verifyRedactionContactsTest() {

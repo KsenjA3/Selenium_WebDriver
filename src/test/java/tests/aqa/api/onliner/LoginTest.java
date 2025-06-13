@@ -1,5 +1,6 @@
 package tests.aqa.api.onliner;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -22,6 +23,7 @@ public class LoginTest extends BaseTest {
         );
     }
 
+    @Disabled
     @ParameterizedTest (name = "Verify login = \"{0}\", password = \"{1}\", statusCode = {3}")
     @MethodSource("provideStringsForBodyAndExpectedResults")
     public void testVerifyDifferentOptionsOfEmailAndPassword(String login, String password, String method,

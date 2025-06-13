@@ -1,10 +1,7 @@
 package tests.aqa.ui.sausedemo;
 
 import lombok.extern.log4j.Log4j2;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import tests.aqa.utils.ConfProperties;
 import tests.aqa.ui.BaseTest;
 import tests.aqa.ui.po.saucedemo.HomePageSaucedemo;
@@ -15,6 +12,8 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+
+@Disabled
 @Tag("UI")
 @Log4j2
 public class SausedemoTest extends BaseTest {

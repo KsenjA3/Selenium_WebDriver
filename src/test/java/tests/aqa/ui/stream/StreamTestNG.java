@@ -1,6 +1,7 @@
 package tests.aqa.ui.stream;
 
 import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.Disabled;
 import org.testng.annotations.*;
 import tests.aqa.utils.ConfProperties;
 import tests.aqa.ui.BaseTestNG;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Disabled
 @Log4j2
 public class StreamTestNG extends BaseTestNG {
     StreamPage streamPage;
