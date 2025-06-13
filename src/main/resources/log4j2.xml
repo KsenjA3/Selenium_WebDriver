@@ -7,9 +7,18 @@
 
         <!-- Console Appender -->
         <Console name="ConsoleAppender" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
+<!--            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />-->
+            <PatternLayout pattern="%msg%n" />
         </Console>
 
+        <Appender type="io.qameta.allure.log4j2.AllureAppender" name="AllureLogAppender">
+            <Layout type="PatternLayout" pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <target>TEST_CASE</target>
+        </Appender>
+
+        <File name="FileLogger" fileName="logs/test-class.log">
+            <PatternLayout pattern="%msg%n"/>
+        </File>
 
     </Appenders>
 
@@ -18,11 +27,18 @@
     <!-- Define the loggers -->
     <Loggers>
 
-        <!-- Root Logger -->
         <Root level="info">
             <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="AllureLogAppender"/>
+            <AppenderRef ref="FileLogger"/>
         </Root>
 
+<!--        <Logger name="com.example.myproject" level="DEBUG" additivity="false">-->
+<!--            <AppenderRef ref="Console"/>-->
+<!--            <AppenderRef ref="AllureLogAppender"/>-->
+<!--        </Logger>-->
+
     </Loggers>
+
 
 </Configuration>

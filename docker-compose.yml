@@ -1,0 +1,120 @@
+#version: '3.8'
+
+services:
+  jenkins:
+    image: myjenkins-blueocean:2.492.3-1
+    container_name: jenkins-blueocean_8085
+    ports:
+      - "8085:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home-8085:/var/jenkins_home
+      - jenkins-docker-certs-8085:/certs/client:ro
+    networks:
+      - jenkins-network
+    environment:
+      - DOCKER_HOST=tcp://docker:2376
+      - DOCKER_CERT_PATH=/certs/client
+      - DOCKER_TLS_VERIFY=1
+volumes:
+  jenkins_home-8085:
+  jenkins-docker-certs-8085:
+
+networks:
+  jenkins-network:
+
+# 1 нет пароля
+#services:
+#  jenkins:
+#    image: jenkins/jenkins:lts
+#    container_name: jenkins-server
+#    ports:
+#      - "8081:8080"
+#      - "50000:50000"
+#    volumes:
+#      - jenkins_home:/var/jenkins_home
+#    networks:
+#      - jenkins-network
+#
+#  jenkins-agent:
+#    image: jenkins/inbound-agent
+#    container_name: jenkins-agent
+#    environment:
+#      - JENKINS_URL=http://jenkins-server:8080
+#      - JENKINS_AGENT_NAME=agent
+#      - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
+#    volumes:
+#      - agent_workdir:/home/jenkins/agent
+#    depends_on:
+#      - jenkins
+#    networks:
+#      - jenkins-network
+#
+#volumes:
+#  jenkins_home:
+#  agent_workdir:
+#
+#networks:
+#  jenkins-network:
+
+#  docker exec -it jenkins-server1 cat /var/jenkins_home/secrets/initialAdminPassword
+
+# 2
+#services:
+#  jenkins:
+#    image: jenkins/jenkins:lts
+#    container_name: jenkins-server2
+#    ports:
+#      - "8082:8080"
+#      - "50000:50000"
+#    volumes:
+#      - ./jenkins.yaml:/var/jenkins_home/jenkins.yaml
+#    networks:
+#      - jenkins-network
+#
+#  jenkins-agent:
+#    image: jenkins/inbound-agent
+#    container_name: jenkins-agent2
+#    environment:
+#      - JENKINS_ADMIN_PASSWORD=wsxcde32!QAZ
+#      - JENKINS_URL=http://jenkins-server2:8080
+#      - JENKINS_AGENT_NAME=agent2
+#      - JENKINS_AGENT_WORKDIR=/home/jenkins2/agent2
+#      - JENKINS_SECRET=d7e0ebd3d8d6106d2da3c200d38baa5e56fe99e98cfc41e1e7e5dc96471415c5  # Укажите секрет здесь
+#    volumes:
+#      - agent_workdir:/home/jenkins/agent
+#    depends_on:
+#      - jenkins
+#    networks:
+#      - jenkins-network
+#
+#volumes:
+#  jenkins_home:
+#  agent_workdir:
+#
+#networks:
+#  jenkins-network:
+
+
+
+
+# 3
+#services:
+#  jenkins:
+#    build: .
+#    ports:
+#      - "8081:8080"
+#      - "50001:50000"
+#    volumes:
+#      - jenkins_home:/var/jenkins_home
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    environment:
+#      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+#    networks:
+#      - jenkins-network
+#
+#volumes:
+#  jenkins_home:
+#
+#networks:
+#  jenkins-network:
